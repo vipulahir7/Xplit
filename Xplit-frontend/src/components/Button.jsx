@@ -1,5 +1,11 @@
+import GlobalContext from '../../globalAttributes.jsx';
+import { useContext } from 'react';
+
 export default function Button(props){
+
+    const { isDark } = useContext(GlobalContext);
+
     return(
-        <button className="bg-[#5755D6] text-white rounded-md p-2 hover:scale-[1.05] transition-all ease-out">{props.text}</button>
+        <button className={`${isDark? "bg-[#5755D6]" : "bg-[#ffffff]"} px-3 h-[60%] rounded-md hover:scale-[1.05] transition-all ease-out"`}>{props.text}</button>
     )
 }
