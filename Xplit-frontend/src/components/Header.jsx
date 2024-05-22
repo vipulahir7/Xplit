@@ -13,7 +13,7 @@ export default function Header(){
             <div className="flex items-center justify-between w-[80vw] h-[100%]">
                 <Logo />
                 <div className="flex w-[15vw] justify-between h-[100%] items-center">
-                    <Mode />
+                    <Mode /> 
                     <Button text="Login"/>
                     <Button text="Signup"/>
                 </div>

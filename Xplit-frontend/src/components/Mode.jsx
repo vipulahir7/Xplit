@@ -9,6 +9,7 @@ export default function Mode(){
     const toggleTheme = () => {
         setIsDark(!isDark);
         setIsDarkMode(!isDarkMode)
+        document.body.setAttribute("data-theme",isDarkMode ? "Dark" : "Light");
     };
 
     return(
