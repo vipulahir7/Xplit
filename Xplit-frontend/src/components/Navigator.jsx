@@ -11,13 +11,13 @@ export default function Navigator(){
     return (
         <nav className="bg-[color:var(--primary-bg)] w-[100vw] h-[10vh] flex justify-center">
             <div className="bg-[color:var(--nav-bg)] w-[21vw] h-[8vh] rounded-lg flex justify-evenly">
-                <NavLink to="/expense">
+                <NavLink to="/expense" className={({isActive}) =>  `rounded-xl ${isActive ? "bg-red-400" : "bg-[nav-bg]"}`}>
                     <NavigatorButton src={`${isDark ? "../../images/expense-white.svg" : "../../images/expense-black.svg"}`} alt="expense"/>
                 </NavLink>
-                <NavLink to="/transaction">
-                    <NavigatorButton src={`${isDark ? "../../images/transact-white.svg" : "../../images/transact-black.svg"}`} alt="transaction"/>
+                <NavLink to="/transaction" className={({isActive}) =>  `rounded-xl ${isActive ? "bg-red-400" : "bg-[nav-bg]"}`}>
+                    <NavigatorButton  src={`${isDark ? "../../images/transact-white.svg" : "../../images/transact-black.svg"}`} alt="transaction"/>
                 </NavLink>
-                <NavLink to="/setting">
+                <NavLink to="/setting" className={({isActive}) =>  `rounded-xl ${isActive ? "bg-red-400" : "bg-[nav-bg]"}`}>
                     <NavigatorButton src={`${isDark ? "../../images/setting-white.svg": "../../images/setting-black.svg"}`} alt="setting"/>
                 </NavLink>
             </div>
