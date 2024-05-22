@@ -13,7 +13,7 @@ body[data-theme="Dark"],body{
 body[data-theme="Light"]{
     --primary-bg:#fff;
     color:black;
-    --header:#d0d0d0;
+    --header:#a8a8a8;
     --nav-btn-bg:#fff;
-    --nav-bg:#d0d0d0;
+    --nav-bg:#c4c4c4;
 }

@@ -3,6 +3,7 @@ import Logo from "./Logo.jsx"
 import Mode from "./Mode.jsx"
 import GlobalContext from '../../globalAttributes.jsx';
 import { useContext } from 'react';
+import { NavLink } from "react-router-dom";
 
 export default function Header(){
 
@@ -14,8 +15,8 @@ export default function Header(){
                 <Logo />
                 <div className="flex w-[15vw] justify-between h-[100%] items-center">
                     <Mode /> 
-                    <Button text="Login"/>
-                    <Button text="Signup"/>
+                    <NavLink to="/login"><Button text="Login"/></NavLink>
+                    <NavLink to="/signup"><Button text="Signup"/></NavLink>
                 </div>
             </div>
         </header>
