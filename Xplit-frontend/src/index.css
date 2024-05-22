@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body[data-theme="Dark"],body{
+    --primary-bg:#111827;
+    color:white;
+    --header:#1f2937;
+    --nav-btn-bg:#5755D6;
+    --nav-bg:#374151;
+}
+
+body[data-theme="Light"]{
+    --primary-bg:#fff;
+    color:black;
+    --header:#d0d0d0;
+    --nav-btn-bg:#fff;
+    --nav-bg:#d0d0d0;
+}
