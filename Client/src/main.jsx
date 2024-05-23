@@ -11,6 +11,7 @@ import Layout from "./Layout.jsx";
 import Expense from "./expense/Expense.jsx"
 import Transaction from "./transaction/Transaction.jsx"
 import Setting from "./setting/Setting.jsx"
+import Welcome from "./welcome/Welcome.jsx";
 
 
 const root = document.getElementById('root');
@@ -20,7 +21,7 @@ reactDOM.createRoot(root).render(
         <BrowserRouter>
             <Routes>
                 <Route path="/" element ={<Layout /> }>
-                    <Route path="/" element={ <Expense /> } />
+                    <Route path="/" element={ <Welcome /> } />
                     <Route path="login" element={ <Login /> } />
                     <Route path="signup" element={ <SignUp /> } />
                     <Route path="expense" element={ <Expense /> } />
