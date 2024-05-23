@@ -12,7 +12,7 @@ export default function Massage() {
                     <p class="text-xl font-semibold mb-1">weekend getaways, capture every moment and expense seamlessly with</p>
                     <p class="text-xl font-semibold mb-1">Xplit, simplifying shared finances among friends."</p>
                 </div>
-                <Link to="/signup" className="bg-[color:var(--nav-bg)] font-bold  py-3 px-4 rounded-full transition animate-pulse">
+                <Link to="/signup" className="bg-[color:var(--nav-bg)] font-bold  py-3 px-4 rounded-full">
                     Get Started
                 </Link>
             </div>

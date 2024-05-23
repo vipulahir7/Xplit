@@ -2,18 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+
 body[data-theme="Dark"],body{
     --primary-bg:#111827;
     color:white;
     --header:#1f2937;
-    --nav-btn-bg:#5755D6;
     --nav-bg:#374151;
+    --primary-btn:#b7b6fd;
 }
 
 body[data-theme="Light"]{
-    --primary-bg:#fff;
+    --primary-bg:#F2F6FE;
     color:black;
-    --header:#a8a8a8;
-    --nav-btn-bg:#fff;
-    --nav-bg:#c4c4c4;
+    --header:#d5d5ec;
+    --nav-bg:#efeff5;
 }

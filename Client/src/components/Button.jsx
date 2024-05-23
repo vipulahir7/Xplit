@@ -6,6 +6,6 @@ export default function Button(props){
     const { isDark } = useContext(GlobalContext);
 
     return(
-        <button className="bg-[color:var(--nav-btn-bg)] p-3 rounded-md hover:scale-[1.05] transition-all ease-out">{props.text}</button>
+        <button className="bg-[color:var(--primary-btn)] p-3 rounded-md hover:scale-[1.05] transition-all ease-out">{props.text}</button>
     )
 }
