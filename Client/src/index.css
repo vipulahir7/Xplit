@@ -2,13 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-
 body[data-theme="Dark"],body{
     --primary-bg:#111827;
     color:white;
     --header:#1f2937;
     --nav-bg:#374151;
     --primary-btn:#b7b6fd;
+    --notes-bg:#808892;
+    --notes-secondary-bg:#bcbfc4;
 }
 
 body[data-theme="Light"]{
@@ -16,4 +17,15 @@ body[data-theme="Light"]{
     color:black;
     --header:#d5d5ec;
     --nav-bg:#efeff5;
+    --notes-bg:#c1c1cb;
+    --notes-secondary-bg:#dfdfe6;
 }
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  

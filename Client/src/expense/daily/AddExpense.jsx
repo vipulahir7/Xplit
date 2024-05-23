@@ -1,5 +1,5 @@
 export default function AddExpense(){
     return (
-        <div className="h-[30%] self-end ml-2 align-bottom w-[20%] bg-blue-800 rounded-md"></div>
+        <div className="drop-shadow-lg absolute right-[-310px] bottom-0 h-[300px] self-end ml-2 align-bottom w-[300px] bg-[color:var(--notes-bg)] rounded-md"></div>
     )
 }
