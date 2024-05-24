@@ -9,7 +9,7 @@ body[data-theme="Dark"],body{
     --nav-bg:#374151;
     --primary-btn:#b7b6fd;
     --notes-bg:#808892;
-    --notes-secondary-bg:#bcbfc4;
+    --notes-secondary-bg:#bbbbbb;
 }
 
 body[data-theme="Light"]{
@@ -19,6 +19,15 @@ body[data-theme="Light"]{
     --nav-bg:#efeff5;
     --notes-bg:#c1c1cb;
     --notes-secondary-bg:#dfdfe6;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 ::-webkit-scrollbar-track {
