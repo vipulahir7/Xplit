@@ -15,6 +15,7 @@ import Welcome from "./welcome/Welcome.jsx";
 import Daily from "./expense/daily/Daily.jsx"
 import Monthly from "./expense/monthly/Monthly.jsx"
 import Yearly from "./expense/yearly/Yearly.jsx"
+import NotFound from "./NotFound.jsx";
 
 const root = document.getElementById('root');
 
@@ -31,9 +32,11 @@ reactDOM.createRoot(root).render(
                         <Route path="daily" element={ <Daily/> }/>
                         <Route path="monthly" element={ <Monthly/> }/>
                         <Route path="yearly" element={ <Yearly/> }/>
+                        <Route path=":any" element={ <NotFound/> }/>
                     </Route>
                     <Route path="transaction" element={ <Transaction /> } />
                     <Route path="setting" element={ <Setting /> } />
+                    <Route path=":any" element={ <NotFound/>} />
                 </Route>
             </Routes>
         </BrowserRouter>
