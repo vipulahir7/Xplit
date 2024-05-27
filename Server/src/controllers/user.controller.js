@@ -10,7 +10,7 @@ const options = {
 const generateAccessAndRefreshToken = async function(userId){
     try{
         const user = await User.findById(userId);
-        const accessToken = user.generateAccessToken()
+        const accessToken = await user.generateAccessToken()
         const refreshToken =await user.generateRefreshToken()
 
         user.refreshToken=refreshToken
@@ -22,6 +22,7 @@ const generateAccessAndRefreshToken = async function(userId){
         throw new ApiError(500,"Something went wrong while accessing tokens");
     }
 }
+
 
 async function handleUserSignUp(req, res){
     const {name, email, password} = req.body;
@@ -48,6 +49,7 @@ async function handleUserSignUp(req, res){
         throw new ApiError(500,err);
     }
 }    
+
 
 async function handleUserLogin(req, res){
     try{
@@ -79,7 +81,24 @@ async function handleUserLogin(req, res){
     }
 }    
 
+
+const getUser = async function (req,res){
+    try{
+        if(req.user){
+            res.status(200).json(new ApiResponse(200,req.user,"User fetched successfully"));
+        }
+        else{
+            res.status(400).josn(new ApiResponse(400,'',"failed to fetch user"));
+        }
+    }
+    catch(err){
+        console.log("Error occured while getting user");
+    }
+}
+
+
 module.exports = {
     handleUserSignUp,
-    handleUserLogin
+    handleUserLogin,
+    getUser
 }

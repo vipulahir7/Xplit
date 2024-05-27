@@ -2,7 +2,7 @@ const ApiError =require("../utils/ApiError.js");
 const jwt = require("jsonwebtoken");
 const  User =require("../models/user.model.js");
 
-export const verifyJWT = async(req, res, next) => {
+const verifyJWT = async(req, res, next) => {
     try {
         const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
         
@@ -26,3 +26,5 @@ export const verifyJWT = async(req, res, next) => {
         throw new ApiError(401, error?.message || "Invalid access token")
     }   
 }
+
+module.exports = verifyJWT

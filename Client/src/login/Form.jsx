@@ -5,7 +5,6 @@ import { NavLink,useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AuthenticationPopup from "./AuthencationPopup.jsx";
 
-
 export default function Form(){
 
     const [showPopup,setShowPopup] = useState(false);
@@ -25,7 +24,7 @@ export default function Form(){
             email,
             password
         }
-        console.log(data);
+
         const res=await fetch("http://localhost:9507/user/login",{
             method:"POST",
             headers: {
@@ -35,8 +34,6 @@ export default function Form(){
         })
 
         const responseData=await res.json();
-        console.log(res)
-        console.log(responseData);
 
         if(!res.ok){
             setText(responseData.message);
