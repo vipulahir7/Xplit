@@ -50,7 +50,6 @@ async function handleUserSignUp(req, res){
     }
 }    
 
-
 async function handleUserLogin(req, res){
     try{
         const {email, password} = req.body;
@@ -83,13 +82,12 @@ async function handleUserLogin(req, res){
 }    
 
 const getUser = async function (req,res){
-
     try{
         if(req.user){
             res.status(200).json(new ApiResponse(200,req.user,"User fetched successfully"));
         }
         else{
-            res.status(400).josn(new ApiResponse(400,{},"failed to fetch user"));
+            res.status(400).json(new ApiResponse(400,{},"failed to fetch user"));
         }
     }
     catch(err){

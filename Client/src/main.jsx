@@ -61,8 +61,8 @@ const Main = () => {
                 <Route path="monthly" element={<Monthly />} />
                 <Route path="yearly" element={<Yearly />} />
               </Route>
-              <Route path="transaction" element={isLoggedIn ? <Expense /> : <NotFound/>} />
-              <Route path="setting" element={isLoggedIn ? <Expense /> : <NotFound/>} />
+              <Route path="transaction" element={isLoggedIn ? <Transaction /> : <NotFound/>} />
+              <Route path="setting" element={isLoggedIn ? <Setting /> : <NotFound/>} />
               <Route path=":any" element={<NotFound />} />
             </Route>
           </Routes>
