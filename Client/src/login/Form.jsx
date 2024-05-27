@@ -1,15 +1,26 @@
 import InputField from "./InputField";
 import FormHeading from "./FormHeading";
 import Button from "../components/Button.jsx";
-import { NavLink } from "react-router-dom";
+import { NavLink,useNavigate } from "react-router-dom";
+import { useState } from "react";
+import AuthenticationPopup from "./AuthencationPopup.jsx";
 
 
 export default function Form(){
+
+    const [showPopup,setShowPopup] = useState(false);
+    const [text,setText] = useState("something went wrong");
+    const navigate = useNavigate();
+
+    function handleClose(){
+        setShowPopup(false);
+    }
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
         let email=e.target.email.value;
         let password=e.target.password.value;
+
         const data ={
             email,
             password
@@ -22,11 +33,22 @@ export default function Form(){
             },
             body:JSON.stringify(data)
         })
-        console.log(res);
+
+        const responseData=await res.json();
+        console.log(res)
+        console.log(responseData);
+
+        if(!res.ok){
+            setText(responseData.message);
+            setShowPopup(true)
+        }
+        else{
+            navigate('/expense');
+        }
     }
 
     return (
-        <div className="bg-[color:var(--nav-bg)] h-[70%] rounded-lg w-[28%] flex flex-col items-center drop-shadow-2xl">
+        <div className="bg-[color:var(--nav-bg)] relative h-[70%] rounded-lg w-[28%] flex flex-col items-center drop-shadow-2xl">
                 < FormHeading text="Login"/>
                 <div className="flex flex-col justify-center w-[100%] h-[85%] flex items-center flex-col gap-2">
                     <form onSubmit={handleSubmit} className="w-[100%] flex justify-between flex-col items-center h-[80%]">
@@ -39,6 +61,8 @@ export default function Form(){
                         <NavLink to="/signup" className={"underline"}>SignUp Now</NavLink>
                     </div>
                 </div>
+                {showPopup && <button onClick={handleClose} className="absolute z-20 right-0 p-2 rounded-[50%] bg-[color:var(--primary-btn)] flex items-center mr-2 mt-2"><img src="/images/Close-window.svg" alt="close" /></button>}
+                {showPopup && <AuthenticationPopup text={text}/>}
         </div>
     )
 }
