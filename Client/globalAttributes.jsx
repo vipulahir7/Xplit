@@ -1,8 +1,9 @@
 import React, { createContext, useState } from 'react';
 
 const GlobalContext = createContext();
+const LoginContext = createContext();
 
-export const GlobalProvider = ({ children }) => {
+const GlobalProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
 
   return (
@@ -12,4 +13,14 @@ export const GlobalProvider = ({ children }) => {
   );
 };
 
-export default GlobalContext;  
+const LoginProvider = ({children}) =>{
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
+
+  return (
+    <LoginContext.Provider value={{isLoggedIn,setIsLoggedIn}}>
+      {children}
+    </LoginContext.Provider>
+  )
+}
+
+export {GlobalContext , LoginContext , GlobalProvider, LoginProvider}

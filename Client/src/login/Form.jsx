@@ -2,10 +2,13 @@ import InputField from "./InputField";
 import FormHeading from "./FormHeading";
 import Button from "../components/Button.jsx";
 import { NavLink,useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AuthenticationPopup from "./AuthencationPopup.jsx";
+import { LoginContext } from "../../globalAttributes.jsx";
 
 export default function Form(){
+
+    const {isLoggedIn,setIsLoggedIn} = useContext(LoginContext);
 
     const [showPopup,setShowPopup] = useState(false);
     const [text,setText] = useState("something went wrong");
@@ -27,6 +30,7 @@ export default function Form(){
 
         const res=await fetch("http://localhost:9507/user/login",{
             method:"POST",
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -40,6 +44,7 @@ export default function Form(){
             setShowPopup(true)
         }
         else{
+            setIsLoggedIn(true);
             navigate('/expense');
         }
     }

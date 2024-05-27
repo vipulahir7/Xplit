@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import AuthenticationPopup from "../login/AuthencationPopup.jsx";
 import { useNavigate } from 'react-router-dom';
+import { LoginContext } from "../../globalAttributes.jsx";
 
 export default function Form(){
 
@@ -53,7 +54,7 @@ const handleSubmit =async (e)=>{
             setShowPopup(true)
         }
         else{
-            navigate('/expense');
+            navigate('/login');
         }
     }
 }

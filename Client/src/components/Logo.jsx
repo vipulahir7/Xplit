@@ -1,4 +1,4 @@
-import GlobalContext from '../../globalAttributes.jsx';
+import {GlobalContext} from '../../globalAttributes.jsx';
 import { useContext } from 'react';
 
 

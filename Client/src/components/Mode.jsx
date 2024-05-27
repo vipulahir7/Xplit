@@ -1,5 +1,5 @@
 import { useState ,useContext} from "react";
-import GlobalContext from '../../globalAttributes.jsx';
+import {GlobalContext} from '../../globalAttributes.jsx';
 
 export default function Mode(){
 

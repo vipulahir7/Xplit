@@ -13,9 +13,9 @@ const generateAccessAndRefreshToken = async function(userId){
         const accessToken = await user.generateAccessToken()
         const refreshToken =await user.generateRefreshToken()
 
+        
         user.refreshToken=refreshToken
         await user.save({validateBeforeSave:false})
-
         return {accessToken, refreshToken}
     }
     catch(err){
@@ -63,8 +63,9 @@ async function handleUserLogin(req, res){
     
                 const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
     
-                const {accessToken, refreshToken}=generateAccessAndRefreshToken(user._id)
+                const {accessToken, refreshToken}=await generateAccessAndRefreshToken(user._id)
     
+                
                 res
                 .status(200)
                 .cookie("accessToken" , accessToken, options)
@@ -83,19 +84,19 @@ async function handleUserLogin(req, res){
 
 
 const getUser = async function (req,res){
+
     try{
         if(req.user){
             res.status(200).json(new ApiResponse(200,req.user,"User fetched successfully"));
         }
         else{
-            res.status(400).josn(new ApiResponse(400,'',"failed to fetch user"));
+            res.status(400).josn(new ApiResponse(400,{},"failed to fetch user"));
         }
     }
     catch(err){
         console.log("Error occured while getting user");
     }
 }
-
 
 module.exports = {
     handleUserSignUp,
