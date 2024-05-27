@@ -82,7 +82,6 @@ async function handleUserLogin(req, res){
     }
 }    
 
-
 const getUser = async function (req,res){
 
     try{

@@ -11,11 +11,11 @@ export default function UserEmail(){
                 'Content-Type': 'application/json'
             }
         })
-
         const data=await res.json();
         setEmail(data.data.email);
     })()
-
+    
+    window.localStorage.setItem("email",email);
     return (
         <span>{email}</span>
     )

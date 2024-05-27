@@ -4,12 +4,10 @@ import {GlobalContext} from '../../globalAttributes.jsx';
 export default function Mode(){
 
     const { isDark, setIsDark } = useContext(GlobalContext);
-    let [isDarkMode,setIsDarkMode] = useState(false);
 
     const toggleTheme = () => {
         setIsDark(!isDark);
-        setIsDarkMode(!isDarkMode)
-        document.body.setAttribute("data-theme",isDarkMode ? "Dark" : "Light");
+        window.localStorage.setItem("isDark",!isDark)
     };
 
     return(
