@@ -17,6 +17,7 @@ import Daily from "./expense/daily/Daily.jsx"
 import Monthly from "./expense/monthly/Monthly.jsx"
 import Yearly from "./expense/yearly/Yearly.jsx"
 import NotFound from "./NotFound.jsx";
+import NotSignIn from "./NotSignIn.jsx";
 
 const Main = () => {
     const { isLoggedIn,setIsLoggedIn } = useContext(LoginContext);
@@ -55,14 +56,14 @@ const Main = () => {
               <Route path="/" element={<Welcome />} />
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
-              <Route path="expense" element={isLoggedIn ? <Expense /> : <NotFound/>}>
+              <Route path="expense" element={isLoggedIn ? <Expense /> : <NotSignIn/>}>
                 <Route path="" element={<Daily />} />
                 <Route path="daily" element={<Daily />} />
                 <Route path="monthly" element={<Monthly />} />
                 <Route path="yearly" element={<Yearly />} />
               </Route>
-              <Route path="transaction" element={isLoggedIn ? <Transaction /> : <NotFound/>} />
-              <Route path="setting" element={isLoggedIn ? <Setting /> : <NotFound/>} />
+              <Route path="transaction" element={isLoggedIn ? <Transaction /> : <NotSignIn/>} />
+              <Route path="setting" element={isLoggedIn ? <Setting /> : <NotSignIn/>} />
               <Route path=":any" element={<NotFound />} />
             </Route>
           </Routes>
