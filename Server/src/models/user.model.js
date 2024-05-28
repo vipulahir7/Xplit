@@ -3,6 +3,7 @@ const {Schema} = require("mongoose");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
 
+
 const userSchema = new Schema({
     name:{
         type: String,
@@ -16,7 +17,13 @@ const userSchema = new Schema({
     password:{
         type: String,
         required: true,
-    }
+    },
+    expenseLists:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "ExpenseList"
+        }
+    ]
 },{timestamps: true});
 
 userSchema.pre("save",async function (next){
