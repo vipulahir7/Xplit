@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react';
 
 const GlobalContext = createContext();
 const LoginContext = createContext();
+const expenseListContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
@@ -23,5 +24,14 @@ const LoginProvider = ({children}) =>{
   )
 }
 
+const ExpenseListProvider = ({children}) =>{
+  const [expenseList,setExpenseList] = useState([]);
 
-export {GlobalContext , LoginContext , GlobalProvider, LoginProvider}
+  return (
+    <expenseListContext.Provider value={{expenseList,setExpenseList}}>
+      {children}
+    </expenseListContext.Provider>
+  )
+}
+
+export {GlobalContext , LoginContext , expenseListContext, ExpenseListProvider , GlobalProvider, LoginProvider}

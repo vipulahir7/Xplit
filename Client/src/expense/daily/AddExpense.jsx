@@ -1,9 +1,11 @@
 import InputField from "../../login/InputField.jsx"
-import { useState } from "react";
+import Button from "../../components/Button.jsx"
+import { expenseListContext } from "../../../globalAttributes.jsx";
+import { useContext } from "react";
 
 export default function AddExpense(){
 
-    const {expenseList,setExpenseList} = useState([]);
+    const {expenseList,setExpenseList} = useContext(expenseListContext);
 
     const HandleAddExpense = async function(e){
         e.preventDefault();
@@ -27,8 +29,7 @@ export default function AddExpense(){
         })
         if(res.ok){
             const responseData = await res.json();
-            expenseList.push(responseData.data);
-            setExpenseList(expenseList);
+            setExpenseList(expenseList => [responseData.data , ...expenseList]);
         }
         else{
             console.log("failed to add data");
