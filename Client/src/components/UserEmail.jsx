@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useContext } from "react";
+import { EmailContext } from "../../globalAttributes.jsx";
 
 export default function UserEmail(){
-    const [email,setEmail]=useState("");
+    const {email, setEmail} = useContext(EmailContext);
+
     (async function(){
         
         const res=await fetch("http://localhost:9507/user/getUser",{
@@ -15,8 +17,8 @@ export default function UserEmail(){
         setEmail(data.data.email);
     })()
     
-    window.localStorage.setItem("email",email);
     return (
         <span>{email}</span>
+        // <span>gmail.com</span>
     )
 }

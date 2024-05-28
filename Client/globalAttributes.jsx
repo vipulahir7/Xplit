@@ -4,6 +4,7 @@ const GlobalContext = createContext();
 const LoginContext = createContext();
 const expenseListContext = createContext();
 const DateDiffContext = createContext();
+const EmailContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
@@ -45,4 +46,14 @@ const DateDiffProvider = ({children}) =>{
   )
 }
 
-export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
+const EmailProvider = ({children}) => {
+  const [email,setEmail] = useState("youremail@xyz.com");
+
+  return (
+    <EmailContext.Provider value={{email, setEmail}}>
+      {children}
+    </EmailContext.Provider>
+  )
+}
+
+export {GlobalContext , LoginContext , expenseListContext,DateDiffContext , EmailContext, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
