@@ -38,13 +38,22 @@ const loadExpense =async (req,res)=>{
         }
         const data= await User.findById(user._id);
         let response = [];
+        const dateToFind = new Date(req.body.date);
         if (data.expenseLists) {
             response = await Promise.all(data.expenseLists.map(async (expenseId) => {
                 const exp = await ExpenseList.findById(expenseId);
-                return exp;
+                const createdAt = new Date(exp.createdAt);
+                // return exp;
+
+                if (createdAt.getFullYear() === dateToFind.getFullYear() &&
+                    createdAt.getMonth() === dateToFind.getMonth() &&
+                    createdAt.getDate() === dateToFind.getDate()) {
+                    return exp;
+                }
             }));
         }
 
+        response = response.filter(exp => exp !== undefined);
         res.status(200).json(new ApiResponse(200,response,"Expense loaded successfully"));
     }
     catch(err){

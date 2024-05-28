@@ -2,11 +2,12 @@ import { useEffect,useContext } from "react"
 import ExpenseHeading from "../ExpenseHeading.jsx"
 import AddExpense from "./AddExpense.jsx"
 import ExpenseList from "./ExpenseList.jsx"
-import { expenseListContext } from "../../../globalAttributes.jsx"
+import { expenseListContext,DateDiffContext } from "../../../globalAttributes.jsx"
 
 export default function Daily(){
 
     const {expenseList,setExpenseList} = useContext(expenseListContext);
+    const {dateDiff} = useContext(DateDiffContext);
 
     const convertToIST = (dateString) => {
         const date = new Date(dateString);
@@ -18,12 +19,12 @@ export default function Daily(){
     useEffect( () => {
         const loadData =async ()=>{
             const res=await fetch("http://localhost:9507/expense/loadExpense",{
-                method:"POSt",
+                method:"POST",
                 credentials:'include',
                 headers:{
                     "Content-Type":"application/json"
                 },
-                body:""
+                body:JSON.stringify({date:new Date().setDate(new Date().getDate()+dateDiff)})
             });
     
             const data = await res.json();
@@ -31,7 +32,7 @@ export default function Daily(){
             setExpenseList(reversedData);
         }
         loadData();
-    },[])
+    },[dateDiff])
 
     return (
             < div className="h-[100%] w-[26%] relative bg-[color:var(--nav-bg)] rounded-lg flex flex-col">

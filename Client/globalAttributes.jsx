@@ -3,6 +3,7 @@ import React, { createContext, useState } from 'react';
 const GlobalContext = createContext();
 const LoginContext = createContext();
 const expenseListContext = createContext();
+const DateDiffContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
@@ -34,4 +35,14 @@ const ExpenseListProvider = ({children}) =>{
   )
 }
 
-export {GlobalContext , LoginContext , expenseListContext, ExpenseListProvider , GlobalProvider, LoginProvider}
+const DateDiffProvider = ({children}) =>{
+  const [dateDiff,setDateDiff] = useState(0);
+
+  return (
+    <DateDiffContext.Provider value={{dateDiff, setDateDiff}}>
+      {children}
+    </DateDiffContext.Provider>
+  )
+}
+
+export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
