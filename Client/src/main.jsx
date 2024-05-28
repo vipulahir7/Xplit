@@ -74,9 +74,9 @@ const root = document.getElementById('root');
 reactDOM.createRoot(root).render( 
 <GlobalProvider>
     <LoginProvider>
-    <BrowserRouter>
-        <Main />
-    </BrowserRouter>
+        <BrowserRouter>
+            <Main />
+        </BrowserRouter>
     </LoginProvider>
 </GlobalProvider>
 );

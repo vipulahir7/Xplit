@@ -23,4 +23,5 @@ const LoginProvider = ({children}) =>{
   )
 }
 
+
 export {GlobalContext , LoginContext , GlobalProvider, LoginProvider}
