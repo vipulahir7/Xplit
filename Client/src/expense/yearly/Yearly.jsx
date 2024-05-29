@@ -1,7 +1,9 @@
+import ExpenseHeading from "../ExpenseHeading";
+
 export default function Yearly(){
     return (
-        <div className="h-[100%] w-[26%] bg-red-500 rounded-md">
-            Yearly
+        <div className="h-[100%] w-[26%] relative bg-[color:var(--nav-bg)] rounded-lg flex flex-col">
+            <ExpenseHeading text="Yearly Expense" />
         </div>
     )
 }

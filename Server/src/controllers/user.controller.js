@@ -151,6 +151,9 @@ const changePassword = async(req, res) => {
         if(!isPasswordCorrect){
             return res.status(400).json(new ApiResponse(400,{},"Password is not correct"));
         }
+        if(oldPassword == newPassword){
+            return res.status(400).json(new ApiResponse(400,{},"Password already exist"));
+        }
         user.password=newPassword;
         await user.save();
     
