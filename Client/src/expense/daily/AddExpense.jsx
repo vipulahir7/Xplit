@@ -1,22 +1,24 @@
 import InputField from "../../login/InputField.jsx"
 import Button from "../../components/Button.jsx"
-import { expenseListContext } from "../../../globalAttributes.jsx";
+import { DateDiffContext, expenseListContext } from "../../../globalAttributes.jsx";
 import { useContext } from "react";
 
 export default function AddExpense(){
 
     const {expenseList,setExpenseList} = useContext(expenseListContext);
+    const {dateDiff} = useContext(DateDiffContext)
 
     const HandleAddExpense = async function(e){
         e.preventDefault();
         let amount = e.target.amount.value;
         let note = e.target.note.value ? e.target.note.value : "";
         let category = e.target.category.value;
-        
+
         const reqData ={
             amount,
             note,
-            category
+            category,
+            createDate:new Date().setDate(new Date().getDate()+dateDiff)
         }
 
         const res = await fetch("http://localhost:9507/expense/addExpense",{

@@ -12,12 +12,13 @@ const addExpense = async (req,res) => {
             res.status(401).json(new ApiResponse(401,{},"You are not logged in to add expense"));
         }
 
-        const {amount, note, category} = req.body
+        const {amount, note, category,createDate} = req.body
 
         const expense = await ExpenseList.create({
             amount,
             note,
-            category
+            category,
+            createDate
         })
         const userDB = await User.findById(user._id);
         userDB.expenseLists.push(expense);
@@ -42,12 +43,12 @@ const loadExpense =async (req,res)=>{
         if (data.expenseLists) {
             response = await Promise.all(data.expenseLists.map(async (expenseId) => {
                 const exp = await ExpenseList.findById(expenseId);
-                const createdAt = new Date(exp.createdAt);
+                const createDate = new Date(exp.createDate);
                 // return exp;
 
-                if (createdAt.getFullYear() === dateToFind.getFullYear() &&
-                    createdAt.getMonth() === dateToFind.getMonth() &&
-                    createdAt.getDate() === dateToFind.getDate()) {
+                if (createDate.getFullYear() === dateToFind.getFullYear() &&
+                    createDate.getMonth() === dateToFind.getMonth() &&
+                    createDate.getDate() === dateToFind.getDate()) {
                     return exp;
                 }
             }));

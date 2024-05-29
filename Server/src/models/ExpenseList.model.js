@@ -10,6 +10,9 @@ const ExpenseListSchema = new mongoose.Schema({
     },
     category: {
         type: String
+    },
+    createDate :{
+        type: Date
     }
 },{timestamps : true});
 

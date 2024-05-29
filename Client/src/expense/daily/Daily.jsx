@@ -3,6 +3,7 @@ import ExpenseHeading from "../ExpenseHeading.jsx"
 import AddExpense from "./AddExpense.jsx"
 import ExpenseList from "./ExpenseList.jsx"
 import { expenseListContext,DateDiffContext } from "../../../globalAttributes.jsx"
+import DateDetails from "./DateDetails.jsx"
 
 export default function Daily(){
 
@@ -44,6 +45,7 @@ export default function Daily(){
                     ) )}
                     </div> 
                 </div>
+                <DateDetails/>
                 <AddExpense/>
             </div>
     )
