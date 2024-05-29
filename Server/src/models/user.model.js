@@ -23,6 +23,18 @@ const userSchema = new Schema({
             type: Schema.Types.ObjectId,
             ref: "ExpenseList"
         }
+    ],
+    dateWiseSums:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "DateWiseSum"
+        }
+    ],
+    monthWiseSums:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: "MonthWiseSum"
+        }
     ]
 },{timestamps: true});
 
