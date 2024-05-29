@@ -165,9 +165,32 @@ const getMonthlySum =async (req,res)=>{
     }
 }
 
+const getYearlySum =async (req,res)=>{
+    try{
+        const userDB =await User.findById(req.user._id)
+        const findDate=new Date();
+        let amount=0;
+        if(userDB.monthWiseSums){
+            await Promise.all(userDB.monthWiseSums.map(async (monthWiseSumId) => {
+                const monthSum = await MonthWiseSum.findById(monthWiseSumId);
+                const createDate = new Date(monthSum.date);
+
+                if (createDate.getFullYear() === findDate.getFullYear()) {
+                    amount+=monthSum.amount;
+                }
+            }));
+        }
+        res.status(200).json(new ApiResponse(200,{amount},"Monthly sum fetched")); 
+    }
+    catch(err){
+        console.log("Error while fetching yearly sum",err);
+    }
+}
+
 module.exports ={
     addExpense,
     loadExpense,
     getDailySum,
-    getMonthlySum
+    getMonthlySum,
+    getYearlySum
 }
