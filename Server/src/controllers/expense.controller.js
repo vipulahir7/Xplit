@@ -3,6 +3,7 @@ const User = require("../models/user.model.js")
 const ExpenseList = require("../models/ExpenseList.model.js")
 const ApiResponse = require("../utils/ApiResponse")
 const DateWiseSum = require("../models/DateWiseSum.model.js")
+const MonthWiseSum = require("../models/MonthWiseSum.model.js")
 
 const addExpense = async (req,res) => {
 
@@ -26,7 +27,7 @@ const addExpense = async (req,res) => {
 
         const findDate= new Date(createDate);
 
-        let notFound = true;
+        let dailyNotFound = true;
 
         if(userDB.dateWiseSums){
             await Promise.all(userDB.dateWiseSums.map(async (dateWiseSumId) => {
@@ -37,19 +38,41 @@ const addExpense = async (req,res) => {
                 if (createDate.getFullYear() === findDate.getFullYear() &&
                     createDate.getMonth() === findDate.getMonth() &&
                     createDate.getDate() === findDate.getDate()) {
-                    notFound=false;
+                    dailyNotFound=false;
                     dateSum.amount += parseInt(amount);
                     await dateSum.save();
                 }
             }));
         }
-
-        if(notFound){
+        if(dailyNotFound){
             const dateWiseSum =await DateWiseSum.create({
                 amount,
                 date:createDate
             })
             userDB.dateWiseSums.push(dateWiseSum)
+        }
+        
+        let monthlyNotFound = true;
+
+        if(userDB.monthWiseSums){
+            await Promise.all(userDB.monthWiseSums.map(async (monthWiseSumId) => {
+                const monthSum = await MonthWiseSum.findById(monthWiseSumId);
+                const createDate = new Date(monthSum.date);
+
+                if (createDate.getFullYear() === findDate.getFullYear() &&
+                    createDate.getMonth() === findDate.getMonth()) {
+                    monthlyNotFound=false;
+                    monthSum.amount += parseInt(amount);
+                    await monthSum.save();
+                }
+            }));
+        }
+        if(monthlyNotFound){
+            const monthWiseSum =await MonthWiseSum.create({
+                amount,
+                date:createDate
+            })
+            userDB.monthWiseSums.push(monthWiseSum)
         }
         
         await userDB.save({validateBeforeSave:false});
@@ -118,8 +141,33 @@ const getDailySum = async (req,res)=>{
     }   
 }
 
+const getMonthlySum =async (req,res)=>{
+    try{
+        const userDB =await User.findById(req.user._id)
+        const date=req.body.date;
+        const findDate=new Date(date);
+        let amount=0;
+        if(userDB.monthWiseSums){
+            await Promise.all(userDB.monthWiseSums.map(async (monthWiseSumId) => {
+                const monthSum = await MonthWiseSum.findById(monthWiseSumId);
+                const createDate = new Date(monthSum.date);
+
+                if (createDate.getFullYear() === findDate.getFullYear() &&
+                    createDate.getMonth() === findDate.getMonth()) {
+                    amount=monthSum.amount;
+                }
+            }));
+        }
+        res.status(200).json(new ApiResponse(200,{amount},"Monthly sum fetched"));
+    }
+    catch(err){
+        console.log("Error while fetching monthly sum",err);
+    }
+}
+
 module.exports ={
     addExpense,
     loadExpense,
-    getDailySum
+    getDailySum,
+    getMonthlySum
 }

@@ -4,6 +4,7 @@ const GlobalContext = createContext();
 const LoginContext = createContext();
 const expenseListContext = createContext();
 const DateDiffContext = createContext();
+const MonthDiffContext = createContext();
 const EmailContext = createContext();
 
 const GlobalProvider = ({ children }) => {
@@ -46,6 +47,16 @@ const DateDiffProvider = ({children}) =>{
   )
 }
 
+const MonthDiffProvider = ({children}) =>{
+  const [monthDiff,setMonthDiff] = useState(0);
+
+  return (
+    <MonthDiffContext.Provider value={{monthDiff, setMonthDiff}}>
+      {children}
+    </MonthDiffContext.Provider>
+  )
+}
+
 const EmailProvider = ({children}) => {
   const [email,setEmail] = useState("youremail@xyz.com");
 
@@ -56,4 +67,4 @@ const EmailProvider = ({children}) => {
   )
 }
 
-export {GlobalContext , LoginContext , expenseListContext,DateDiffContext , EmailContext, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
+export {GlobalContext , LoginContext , expenseListContext,DateDiffContext , EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}

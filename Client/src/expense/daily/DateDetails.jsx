@@ -7,7 +7,6 @@ export default function DateDetails(){
     const [dailySum,setDailySum] = useState(0);
 
     useEffect( () => {
-        console.log("function");
         const loadData = async ()=>{
             const res=await fetch("http://localhost:9507/expense/getDailySum",{
                 method:"POST",
@@ -17,14 +16,12 @@ export default function DateDetails(){
                 },
                 body:JSON.stringify({date:new Date().setDate(new Date().getDate()+dateDiff)})
             });
-            console.log(res);
             const data = await res.json();
-            console.log("Data", data);
             setDailySum(data.data.amount);
         }
         loadData();
     },[dateDiff,expenseList])
-
+    
 
     var newDate = new Date();
     newDate.setDate(newDate.getDate() + dateDiff);
@@ -32,7 +29,7 @@ export default function DateDetails(){
     return (
         <div className="drop-shadow-lg rounded-md z-10 gap-2 bg-[color:var(--nav-bg)] absolute flex flex-col items-center right-[-310px] top-0 h-[30%] self-end ml-2 align-bottom w-[300px] bg-[color:var(--nav-bg)] rounded-md">
             <span className="text-2xl">{dateString}</span>
-            <span>Total : {dailySum}</span>
+            <span className="text-2xl">Total : {dailySum}</span>
             <button onClick={()=>setDateDiff(0)} className="bg-[color:var(--primary-btn)] p-3 rounded-md hover:scale-[1.05] transition-all ease-out">Today</button>
         </div>
     )

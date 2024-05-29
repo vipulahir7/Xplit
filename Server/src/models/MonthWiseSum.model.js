@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const MonthWiseSumSchema = new mongoose.Schema({
-    amounts:{
+    amount:{
         type: Number
     },
-    month:{
+    date:{
         type: Date
     }
 })
