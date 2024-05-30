@@ -6,6 +6,10 @@ export default function MonthDetails(){
     const {expenseList} = useContext(expenseListContext);
     const [monthlySum,setMonthlySum] = useState(0);
 
+    const date = new Date()
+    date.setDate(1);
+    date.setMonth(new Date().getMonth()+monthDiff)
+
     useEffect( () => {
         const loadData = async ()=>{
             const res=await fetch("http://localhost:9507/expense/getMonthlySum",{
@@ -14,7 +18,7 @@ export default function MonthDetails(){
                 headers:{
                     "Content-Type":"application/json"
                 },
-                body:JSON.stringify({date:new Date().setMonth(new Date().getMonth()+monthDiff)})
+                body:JSON.stringify({date})
             });
             const data = await res.json();
             setMonthlySum(data.data.amount);
@@ -22,9 +26,7 @@ export default function MonthDetails(){
         loadData();
     },[monthDiff,expenseList])
 
-    var newDate = new Date();
-    newDate.setMonth(newDate.getMonth() + monthDiff);
-    let dateString = newDate.toISOString().split("T")[0];
+    let dateString = date.toISOString().split("T")[0];
     dateString = dateString.split("-")[1] +"-" + dateString.split("-")[0];
     return (
         <div className="drop-shadow-lg rounded-md z-10 gap-2 justify-center bg-[color:var(--nav-bg)] absolute flex flex-col items-center right-[-310px] top-0 h-[30%] self-end ml-2 align-bottom w-[300px] bg-[color:var(--nav-bg)] rounded-md">

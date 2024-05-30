@@ -3,7 +3,6 @@ const cors = require("cors");
 const cookieParser = require('cookie-parser');
 const userRouter =require("./src/Routes/user.route.js");
 const expenseRouter= require("./src/Routes/expense.route.js")
-const verifyJWT = require("./src/middlewares/verifyJWT.js");
 
 const app=express();
 

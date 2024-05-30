@@ -10,8 +10,8 @@ export default function Monthly() {
     useEffect(() => {
         const loadData = async () => {
             let date = new Date();
-            date.setMonth(new Date().getMonth() + monthDiff);
             date.setDate(1);
+            date.setMonth(new Date().getMonth() + monthDiff);
             const month = date.getMonth();
             const newData = [];
 

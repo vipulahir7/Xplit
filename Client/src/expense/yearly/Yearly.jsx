@@ -10,6 +10,8 @@ export default function Monthly() {
             
             let date = new Date();
             date.setMonth(0);
+            date.setDate(1);
+            console.log(date);
             const year = date.getFullYear();
             const newData = [];
 
