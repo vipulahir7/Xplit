@@ -36,17 +36,21 @@ export default function Daily(){
     },[dateDiff])
 
     return (
-            < div className="h-[100%] w-[26%] relative bg-[color:var(--nav-bg)] rounded-lg flex flex-col">
-                <ExpenseHeading text="Daily Expenses"/>
-                <div className="h-[90%] w-[100%] flex flex-col justify-center">
-                    <div className="flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
-                    {expenseList.map(expense => (
-                        <ExpenseList key={expense.id} amount={expense.amount} category={expense.category} note={expense.note} time={convertToIST(expense.createdAt)} />
-                    ) )}
-                    </div> 
-                </div>
+        <>
+        < div className="h-[100%] w-[26%] relative bg-[color:var(--nav-bg)] rounded-lg flex flex-col">
+            <ExpenseHeading text="Daily Expenses"/>
+            <div className="h-[90%] w-[100%] flex flex-col justify-center">
+                <div className="flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
+                {expenseList.map(expense => (
+                    <ExpenseList key={expense.id} amount={expense.amount} category={expense.category} note={expense.note} time={convertToIST(expense.createdAt)} />
+                ) )}
+                </div> 
+            </div>
+        </div>
+            <div className="flex flex-col justify-between">
                 <DateDetails/>
                 <AddExpense/>
             </div>
+        </>
     )
 }

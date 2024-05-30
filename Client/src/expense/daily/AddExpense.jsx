@@ -39,7 +39,7 @@ export default function AddExpense(){
     }
 
     return (
-        <div className="drop-shadow-lg rounded-t-md absolute flex flex-col items-center right-[-310px] bottom-0 h-[320px] self-end ml-2 align-bottom w-[300px] bg-[color:var(--nav-bg)] rounded-md">
+        <div className="drop-shadow-lg rounded-t-md flex flex-col items-center h-[320px] self-end ml-2 align-bottom w-[300px] bg-[color:var(--nav-bg)] rounded-md">
             <div className="w-[100%] h-[20%] bg-[color:var(--header)] rounded-t-md flex items-center justify-center font-semibold text-xl">Add Expense</div>
             <form onSubmit={HandleAddExpense} className="h-[80%] flex flex-col items-center gap-2">
                 <InputField id="amount" name="amount" placeHolder="Enter Amount" type="number" isLimit="true"/>

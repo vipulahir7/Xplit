@@ -27,7 +27,7 @@ export default function DateDetails(){
     newDate.setDate(newDate.getDate() + dateDiff);
     const dateString = newDate.toISOString().split("T")[0] 
     return (
-        <div className="drop-shadow-lg rounded-md justify-center z-10 gap-2 bg-[color:var(--nav-bg)] absolute flex flex-col items-center right-[-310px] top-0 h-[30%] self-end ml-2 align-bottom w-[300px] bg-[color:var(--nav-bg)] rounded-md">
+        <div className="drop-shadow-lg rounded-md justify-center z-10 gap-2 bg-[color:var(--nav-bg)] flex flex-col items-center h-[30%] self-end ml-2 align-bottom w-[300px] bg-[color:var(--nav-bg)] rounded-md">
             <span className="text-2xl">{dateString}</span>
             <span className="text-2xl">Total : {dailySum}</span>
             <button onClick={()=>setDateDiff(0)} className="bg-[color:var(--primary-btn)] p-3 rounded-md hover:scale-[1.05] transition-all ease-out">Today</button>

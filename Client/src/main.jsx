@@ -21,6 +21,7 @@ import NotSignIn from "./NotSignIn.jsx";
 import Logout from "./setting/Logout/Logout.jsx";
 import PasswordChange from "./setting/passwordChange/PasswordChange.jsx";
 import EmailChange from "./setting/emailChange/EmailChange.jsx";
+import SelectExpense from "../src/expense/SelectExpense.jsx"
 
 const Main = () => {
     const { isLoggedIn,setIsLoggedIn } = useContext(LoginContext);
@@ -60,7 +61,7 @@ const Main = () => {
               <Route path="login" element={<Login />} />
               <Route path="signup" element={<SignUp />} />
               <Route path="expense" element={isLoggedIn ? <Expense /> : <NotSignIn/>}>
-                <Route path="" element={<Daily />} />
+                <Route path="" element={<SelectExpense />} />
                 <Route path="daily" element={<Daily />} />
                 <Route path="monthly" element={<Monthly />} />
                 <Route path="yearly" element={<Yearly />} />

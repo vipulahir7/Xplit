@@ -255,7 +255,6 @@ const loadMonthlySum = async (req,res)=>{
                 }
             }));
         }
-        // console.log(monthlySum);
 
         res.status(200).json(monthlySum);
     }
