@@ -33,6 +33,12 @@ input[type=number]::-webkit-outer-spin-button {
   background: var(--header);
 }
 
+.usermessage::-webkit-scrollbar{
+  scrollbar-width: thin;
+}
+.usermessage::-webkit-scrollbar-track{
+  background: var(--nav-bg);
+}
 input[type=number] {
   -moz-appearance: textfield;
 }
