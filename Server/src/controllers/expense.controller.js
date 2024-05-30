@@ -186,11 +186,90 @@ const getYearlySum =async (req,res)=>{
         console.log("Error while fetching yearly sum",err);
     }
 }
+const loadDailySum = async (req,res)=>{
+    try{
+        const userDB = await User.findById(req.user._id)
+        let findDate =new Date(req.body.date);
+        const month=findDate.getMonth();
+
+        let dailySum=[];
+
+        while(findDate.getMonth() === month){
+            const date=new Date(findDate);
+            dailySum.push({
+                date,
+                amount:0
+            })
+            findDate.setDate(findDate.getDate()+1);
+        }
+
+        findDate.setMonth(findDate.getMonth()-1);
+
+        if(userDB.dateWiseSums){
+            await Promise.all(userDB.dateWiseSums.map(async (dateWiseSumId) => {
+                const dateSum = await DateWiseSum.findById(dateWiseSumId);
+                const createDate = new Date(dateSum.date);
+
+                if (createDate.getFullYear() === findDate.getFullYear() &&
+                    createDate.getMonth() === findDate.getMonth()) {
+
+                    dailySum[createDate.getDate() - 1].amount+=dateSum.amount;
+                }
+            }));
+        }
+        res.status(200).json(dailySum);
+    }
+    catch(err){
+        console.log("Error while loading daily sum",err);
+    }
+}
+
+const loadMonthlySum = async (req,res)=>{
+    try{
+        const userDB = await User.findById(req.user._id)
+        let findDate =new Date(req.body.date);
+        const year=findDate.getYear();
+
+        let dateTofind=new Date(findDate);
+
+        let monthlySum=[];
+
+        while(findDate.getYear() === year){
+            const date=new Date(findDate);
+            monthlySum.push({
+                date,
+                amount:0
+            })
+            findDate.setMonth(findDate.getMonth()+1);
+        }
+
+        findDate=dateTofind;
+
+        if(userDB.monthWiseSums){
+            await Promise.all(userDB.monthWiseSums.map(async (monthWiseSumId) => {
+                const monthSum = await MonthWiseSum.findById(monthWiseSumId);
+                const createDate = new Date(monthSum.date);
+
+                if (createDate.getFullYear() === findDate.getFullYear()) {
+                    monthlySum[createDate.getMonth()].amount+=monthSum.amount;
+                }
+            }));
+        }
+        // console.log(monthlySum);
+
+        res.status(200).json(monthlySum);
+    }
+    catch(err){
+        console.log("Error while loading daily sum",err);
+    }
+}
 
 module.exports ={
     addExpense,
     loadExpense,
     getDailySum,
     getMonthlySum,
-    getYearlySum
+    getYearlySum,
+    loadDailySum,
+    loadMonthlySum
 }

@@ -9,26 +9,19 @@ export default function Monthly() {
         const loadData = async () => {
             
             let date = new Date();
-            date.setMonth(0);
             date.setDate(1);
-            console.log(date);
-            const year = date.getFullYear();
-            const newData = [];
+            date.setMonth(0);
 
-            while (date.getFullYear() === year) {
-                const res = await fetch("http://localhost:9507/expense/getMonthlySum", {
-                    method: "POST",
-                    credentials: 'include',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ date })
-                });
-                const data = await res.json();
-                newData.push({ date: new Date(date), amount: data.data.amount });
-                date.setMonth(date.getMonth() + 1);
-            }
-            setYearlyData(newData);
+            const res = await fetch("http://localhost:9507/expense/loadMonthlySum", {
+                method: "POST",
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ date })
+            });
+            const data=await res.json();
+            setYearlyData(data);
         };
         loadData();
     }, []);
@@ -42,7 +35,7 @@ export default function Monthly() {
             <div className="h-[90%] w-[100%] flex flex-col justify-center">
                 <div className="flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
                     {yearlyData.map(data => (
-                        <MonthlyList key={data.date.toISOString()} date={data.date.toISOString().split("T")[0].split("-")[0] +"-"+ data.date.toISOString().split("T")[0].split("-")[1]} amount={data.amount} />
+                        <MonthlyList key={data.date} date={new Date(data.date).toISOString().split("T")[0].split("-")[0] +"-"+ new Date(data.date).toISOString().split("T")[0].split("-")[1]} amount={data.amount} />
                     ))}
                 </div>
             </div>

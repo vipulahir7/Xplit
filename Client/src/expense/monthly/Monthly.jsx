@@ -12,28 +12,27 @@ export default function Monthly() {
             let date = new Date();
             date.setDate(1);
             date.setMonth(new Date().getMonth() + monthDiff);
-            const month = date.getMonth();
-            const newData = [];
-
-            while (date.getMonth() === month) {
-                const res = await fetch("http://localhost:9507/expense/getDailySum", {
-                    method: "POST",
-                    credentials: 'include',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ date })
-                });
-                const data = await res.json();
-                newData.push({ date: new Date(date), amount: data.data.amount });
-                date.setDate(date.getDate() + 1);
-            }
             
-            setMonthlyData(newData);
-        };
+            const res = await fetch("http://localhost:9507/expense/loadDailySum", {
+                method: "POST",
+                credentials: 'include',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ date })
+            });
 
+            const data = await res.json();
+            setMonthlyData(data);
+            console.log(monthlyData)
+        };
         loadData();
     }, [monthDiff]);
+
+    // useEffect to observe changes in monthlyData
+    useEffect(() => {
+        console.log(monthlyData);
+    }, [monthlyData]);
 
     function decrementDiff() {
         setMonthDiff(monthDiff - 1);
@@ -54,7 +53,7 @@ export default function Monthly() {
             <div className="h-[90%] w-[100%] flex flex-col justify-center">
                 <div className="flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
                     {monthlyData.map(data => (
-                        <MonthlyList key={data.date.toISOString()} date={data.date.toISOString().split("T")[0]} amount={data.amount} />
+                        <MonthlyList key={data.date} date={new Date(data.date).toISOString().split("T")[0]} amount={data.amount} />
                     ))}
                 </div>
             </div>
