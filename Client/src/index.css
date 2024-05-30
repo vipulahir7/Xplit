@@ -26,6 +26,13 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none; 
 }
 
+.user::-webkit-scrollbar{
+  scrollbar-width: thin;
+}
+.user::-webkit-scrollbar-track{
+  background: var(--header);
+}
+
 input[type=number] {
   -moz-appearance: textfield;
 }
