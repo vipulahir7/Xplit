@@ -7,6 +7,7 @@ const DateDiffContext = createContext();
 const MonthDiffContext = createContext();
 const EmailContext = createContext();
 const UserListContext = createContext();
+const CurrentTransactionUserContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
@@ -80,4 +81,13 @@ const UserListProvider = ({children})=>{
 
 }
 
-export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, UserListContext, UserListProvider, EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
+const CurrentTransactionUserProvider = ({children})=>{
+  const [currentTransactionUser,setCurrentTransactionUser]=useState({});
+  return (
+    <CurrentTransactionUserContext.Provider value={{currentTransactionUser,setCurrentTransactionUser}}>
+      {children}
+    </CurrentTransactionUserContext.Provider>
+  )
+}
+
+export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, UserListContext,CurrentTransactionUserContext,CurrentTransactionUserProvider, UserListProvider, EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}

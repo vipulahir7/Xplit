@@ -23,7 +23,7 @@ export default function UserMessage(){
     },[])
 
     return(
-        <div className="h-[80%] user overflow-x-hidden overflow-y-auto mb-2">
+        <div className="h-[80%] user overflow-x-hidden flex flex-col items-center overflow-y-auto mb-2">
            {userList.map(user => (
                     <User username={user.username} email={user.email} />
             ) )}
