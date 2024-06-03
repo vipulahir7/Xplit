@@ -29,7 +29,7 @@ export default function Messages(){
 
     return(
         <div className="usermessage h-[86%] overflow-x-hidden overflow-y-auto">
-            {transactionList.map((list)=> <Message time={list.createdAt} isLeft={currentTransactionUser.email==list.sendBy} amount={list.amount} note={list.note} />)}
+            {transactionList.length?transactionList.map((list)=> <Message time={list.createdAt} isLeft={currentTransactionUser.email==list.sendBy} amount={list.amount} note={list.note} />):<></>}
         </div>
     )
 }
