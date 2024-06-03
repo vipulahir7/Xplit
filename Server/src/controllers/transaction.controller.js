@@ -1,3 +1,4 @@
+const TransactionChat = require("../models/transactionChat.model");
 const User = require("../models/user.model");
 const ApiError = require("../utils/ApiError");
 const ApiResponse = require("../utils/ApiResponse");
@@ -43,7 +44,55 @@ async function HandleLoadUserList(req,res){
     }
 }
 
+async function HandleAddTransaction(req,res){
+    try{
+        const reqUser = req.user;
+        if(!reqUser){
+            res.status(401).json(new ApiResponse(401,{},"You are not logged in to transaction"));
+        }
+        else{
+
+            const userDB = await User.findById(reqUser._id);
+            const firstPerson = userDB.email;
+            const secondPerson = req.body.recieverEmail;
+
+            let chat = await TransactionChat.findOne({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson});
+            if(!chat){
+                chat=await TransactionChat.findOne({firstPersonEmail : secondPerson,secondPersonEmail:firstPerson}); 
+            }
+            const {amount,note} = req.body;
+            if(amount==''){
+                amount=0;
+            }
+            else{
+                amount=JSON.parseINT(amount);
+            }
+
+            const msg={
+                amount,
+                note,
+                sendBy:firstPerson,
+                createdAt : new Date()
+            }
+            
+            if(chat){
+                chat.transactions.push(msg);
+            }
+            else{
+                chat = await TransactionChat.createOne({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg]});
+            }
+            console.log(chat);
+            res.status(200).json(new ApiResponse(200,{},"transaction loaded successfully"));
+        }
+    }
+    catch(err){
+        console.log("error : ",err)
+        throw new ApiError(500,"Failed to add transaction");
+    }
+}
+
 module.exports = {
     HandleVerifyAddUser,
-    HandleLoadUserList
+    HandleLoadUserList,
+    HandleAddTransaction
 }
