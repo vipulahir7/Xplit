@@ -6,6 +6,7 @@ const expenseListContext = createContext();
 const DateDiffContext = createContext();
 const MonthDiffContext = createContext();
 const EmailContext = createContext();
+const UserListContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
@@ -67,4 +68,16 @@ const EmailProvider = ({children}) => {
   )
 }
 
-export {GlobalContext , LoginContext , expenseListContext,DateDiffContext , EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
+const UserListProvider = ({children})=>{
+
+    const [userList,setUserList]=useState([]);
+
+    return (
+      <UserListContext.Provider value={{userList,setUserList}}>
+        {children}
+      </UserListContext.Provider>
+    )
+
+}
+
+export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, UserListContext, UserListProvider, EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
