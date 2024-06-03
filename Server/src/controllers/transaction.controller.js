@@ -90,8 +90,37 @@ async function HandleAddTransaction(req,res){
     }
 }
 
+async function HandleLoadTransactions(req,res){
+    try{
+        const reqUser = req.user;
+        if(!reqUser){
+            res.status(401).json(new ApiResponse(401,{},"You are not logged in to transaction"));
+        }
+        else{
+            const userDB = await User.findById(reqUser._id);
+            const firstPerson = userDB.email;
+            const secondPerson = req.body.recieverEmail;
+            let chat = await TransactionChat.findOne({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson});
+            if(!chat){
+                chat=await TransactionChat.findOne({firstPersonEmail : secondPerson,secondPersonEmail:firstPerson}); 
+            }
+            if(chat){
+                res.status(200).json(new ApiResponse(200,chat.transactions,"Success"));
+            }
+            else{
+                res.status(500).json(new ApiResponse(500,{},"Server error"));
+            }
+        }
+    }
+    catch(err){
+        console.log("error : ",err)
+        throw new ApiError(500,"Failed to add transaction");
+    }
+}
+
 module.exports = {
     HandleVerifyAddUser,
     HandleLoadUserList,
-    HandleAddTransaction
+    HandleAddTransaction,
+    HandleLoadTransactions
 }
