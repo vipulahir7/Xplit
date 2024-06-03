@@ -17,7 +17,7 @@ export default function UserMessage(){
                 }
             })
             const data=await res.json();
-            console.log(data.data);
+            setUserList(data.data)
         })()
 
     },[])
