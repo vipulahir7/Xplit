@@ -1,7 +1,7 @@
 import React from "react";
 import InputField from "../../login/InputField";
 import { useContext } from "react";
-import {CurrentTransactionUserContext} from "../../../globalAttributes.jsx"
+import {CurrentTransactionUserContext,TransactionListContext} from "../../../globalAttributes.jsx"
 
 export default function AddTransaction(){
 

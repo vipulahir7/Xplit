@@ -77,6 +77,7 @@ async function HandleAddTransaction(req,res){
             
             if(chat){
                 chat.transactions.push(msg);
+                await chat.save({validateBeforeSave:false});
             }
             else{
                 chat = await TransactionChat.create({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg]});
