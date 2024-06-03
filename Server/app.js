@@ -3,6 +3,7 @@ const cors = require("cors");
 const cookieParser = require('cookie-parser');
 const userRouter =require("./src/Routes/user.route.js");
 const expenseRouter= require("./src/Routes/expense.route.js")
+const transactionRouter = require("./src/Routes/transaction.route.js");
 
 const app=express();
 
@@ -17,5 +18,6 @@ app.use(cors({
 app.use(cookieParser())
 app.use("/user",userRouter)
 app.use("/expense",expenseRouter);
+app.use("/transaction",transactionRouter);
 
 module.exports=app

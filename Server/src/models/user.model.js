@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const {Schema} = require("mongoose");
 const bcrypt = require('bcrypt');
 const jwt = require("jsonwebtoken");
+const { type } = require("os");
 
 
 const userSchema = new Schema({
@@ -34,6 +35,11 @@ const userSchema = new Schema({
         {
             type: Schema.Types.ObjectId,
             ref: "MonthWiseSum"
+        }
+    ],
+    userList:[
+        {
+            type: Object
         }
     ]
 },{timestamps: true});
