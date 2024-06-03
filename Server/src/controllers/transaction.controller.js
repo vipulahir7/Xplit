@@ -60,12 +60,12 @@ async function HandleAddTransaction(req,res){
             if(!chat){
                 chat=await TransactionChat.findOne({firstPersonEmail : secondPerson,secondPersonEmail:firstPerson}); 
             }
-            const {amount,note} = req.body;
+            let {amount,note} = req.body;
             if(amount==''){
                 amount=0;
             }
             else{
-                amount=JSON.parseINT(amount);
+                amount=parseInt(amount);
             }
 
             const msg={
@@ -79,9 +79,8 @@ async function HandleAddTransaction(req,res){
                 chat.transactions.push(msg);
             }
             else{
-                chat = await TransactionChat.createOne({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg]});
+                chat = await TransactionChat.create({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg]});
             }
-            console.log(chat);
             res.status(200).json(new ApiResponse(200,{},"transaction loaded successfully"));
         }
     }
