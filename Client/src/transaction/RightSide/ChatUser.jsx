@@ -9,7 +9,7 @@ export default function ChatUser(){
 
     return(
         <div className="flex h-[8vh] justify-center items-center gap-5 bg-[color:var(--header)] rounded-lg m-2">
-            {isSelected && <div className="w-12 h-[6vh] flex justify-center items-center text-lg rounded-full bg-[color:var(--primary-btn)]">
+            {isSelected && <div className="w-10 aspect-square flex justify-center items-center text-lg rounded-full bg-[color:var(--primary-btn)]">
             <h1>{currentTransactionUser.username[0].toUpperCase()}</h1>
             </div>}
             <div>

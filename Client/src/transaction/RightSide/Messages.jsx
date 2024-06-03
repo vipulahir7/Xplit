@@ -9,7 +9,10 @@ export default function Messages(){
 
     return(
         <div className="usermessage h-[86%] overflow-x-hidden overflow-y-auto">
-            {isSelected && <span>render : {currentTransactionUser.email}</span>}
+            {isSelected && 
+            <div>
+                        
+            </div>}
         </div>
     )
 }

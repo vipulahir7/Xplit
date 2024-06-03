@@ -3,7 +3,7 @@ import reactDOM from "react-dom"
 import "./index.css"
 import Header from "./components/Header.jsx"
 import Navigator from "./components/Navigator.jsx"
-import { GlobalProvider,GlobalContext,LoginContext,LoginProvider, ExpenseListProvider ,EmailProvider} from "../globalAttributes.jsx";
+import { GlobalProvider,GlobalContext,LoginContext,LoginProvider, ExpenseListProvider ,EmailProvider,CurrentTransactionUserProvider} from "../globalAttributes.jsx";
 import Login from "./login/Login.jsx"
 import SignUp from "./signup/SignUp.jsx"
 import { BrowserRouter, Routes,Route} from "react-router-dom";
@@ -84,11 +84,13 @@ reactDOM.createRoot(root).render(
 <GlobalProvider>
     <LoginProvider>
       <ExpenseListProvider>
-        <EmailProvider>
-          <BrowserRouter>
-              <Main />
-          </BrowserRouter>
-        </EmailProvider>
+        <CurrentTransactionUserProvider>
+          <EmailProvider>
+            <BrowserRouter>
+                <Main />
+            </BrowserRouter>
+          </EmailProvider>
+        </CurrentTransactionUserProvider>
       </ExpenseListProvider>
     </LoginProvider>
 </GlobalProvider>

@@ -1,21 +1,20 @@
 const mongoose = require("mongoose");
 
 const TransactionChatSchema = new mongoose.Schema({
-    senderEmail:{
+    firstPersonEmail:{
         type: String,
         required: true
     },
-    recieverEmail:{
+    secondPersonEmail:{
         type: String,
         required: true
     },
-    note:{
-        type: String,
-    },
-    amount:{
-        type: String
-    }
-},{timestamp: true});
+    transactions:[
+        {
+            type:Object
+        }
+    ]
+});
 
 const TransactionChat = mongoose.model("transactionChat",TransactionChatSchema);
 
