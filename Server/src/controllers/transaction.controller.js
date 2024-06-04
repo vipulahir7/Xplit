@@ -3,6 +3,8 @@ const User = require("../models/user.model");
 const ApiError = require("../utils/ApiError");
 const ApiResponse = require("../utils/ApiResponse");
 
+const onlineUsers={};
+
 async function HandleVerifyAddUser(req,res){
     try{
         const reqUser = req.user;

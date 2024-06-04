@@ -9,6 +9,7 @@ const EmailContext = createContext();
 const UserListContext = createContext();
 const CurrentTransactionUserContext = createContext();
 const TransactionListContext = createContext();
+const SocketContext = createContext();
 
 const GlobalProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(true);
@@ -100,4 +101,13 @@ const TransactionListProvider = ({children})=>{
   )
 }
 
-export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, UserListContext,TransactionListContext,CurrentTransactionUserContext, TransactionListProvider,CurrentTransactionUserProvider, UserListProvider, EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
+const socketProvider = ({children})=>{
+  const [socket,setScoket]=useState(null);
+  return (
+    <SocketContext.Provider value={{socket,setScoket}}>
+      {children}
+    </SocketContext.Provider>
+  )
+}
+
+export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, UserListContext,TransactionListContext,CurrentTransactionUserContext,SocketContext, socketProvider,TransactionListProvider,CurrentTransactionUserProvider, UserListProvider, EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}

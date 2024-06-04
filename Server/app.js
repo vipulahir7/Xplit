@@ -4,6 +4,8 @@ const cookieParser = require('cookie-parser');
 const userRouter =require("./src/Routes/user.route.js");
 const expenseRouter= require("./src/Routes/expense.route.js")
 const transactionRouter = require("./src/Routes/transaction.route.js");
+const {Server} = require('socket.io');
+const {createServer} = require('http');
 
 const app=express();
 
@@ -20,4 +22,25 @@ app.use("/user",userRouter)
 app.use("/expense",expenseRouter);
 app.use("/transaction",transactionRouter);
 
-module.exports=app
+const server = new createServer(app);
+const io= new Server(server,{
+    cors:{
+        origin:"http://localhost:5173",
+        credentials:true,
+        methods:["GET", "POST"]
+    }
+}
+);
+
+io.on("connection",(socket)=>{
+    console.log("user connected : ",socket.id);
+
+    socket.on("disconnect",()=>{
+        console.log("user disconnected : ",socket.id);
+    })
+
+    
+
+})
+
+module.exports=server

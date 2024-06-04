@@ -3,7 +3,7 @@ import reactDOM from "react-dom"
 import "./index.css"
 import Header from "./components/Header.jsx"
 import Navigator from "./components/Navigator.jsx"
-import { GlobalProvider,GlobalContext,LoginContext,LoginProvider, ExpenseListProvider ,EmailProvider,CurrentTransactionUserProvider} from "../globalAttributes.jsx";
+import { GlobalProvider,GlobalContext,LoginContext,LoginProvider, ExpenseListProvider ,EmailProvider,CurrentTransactionUserProvider,SocketProvider} from "../globalAttributes.jsx";
 import Login from "./login/Login.jsx"
 import SignUp from "./signup/SignUp.jsx"
 import { BrowserRouter, Routes,Route} from "react-router-dom";
@@ -24,6 +24,7 @@ import EmailChange from "./setting/emailChange/EmailChange.jsx";
 import SelectExpense from "../src/expense/SelectExpense.jsx"
 
 const Main = () => {
+
     const { isLoggedIn,setIsLoggedIn } = useContext(LoginContext);
     const {isDark,setIsDark}=useContext(GlobalContext);
     const navigate = useNavigate();
@@ -85,11 +86,13 @@ reactDOM.createRoot(root).render(
     <LoginProvider>
       <ExpenseListProvider>
         <CurrentTransactionUserProvider>
+          <SocketProvider>
           <EmailProvider>
             <BrowserRouter>
                 <Main />
             </BrowserRouter>
           </EmailProvider>
+          </SocketProvider>
         </CurrentTransactionUserProvider>
       </ExpenseListProvider>
     </LoginProvider>
