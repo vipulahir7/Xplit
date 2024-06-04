@@ -10,24 +10,26 @@ export default function Transaction(){
     
     const {currentTransactionUser}=useContext(CurrentTransactionUserContext);
     let isSelected=(currentTransactionUser.hasOwnProperty("username"));
-    const {setSocket} =useContext(SocketContext);
+    const {socket,setSocket} =useContext(SocketContext);
+    const socketIO = useMemo(()=>io("http://localhost:9507"),[]);
     
     useEffect(()=>{
-        const socket = useMemo(()=>io("http://localhost:9507"),[]);
-        socket.on("connect", async ()=>{
-            await fetch("http://localhost:9507/transactions/addOnlineUser",{
-                method:"POST",
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body:JSON.stringify({socketId: socket.id})
-            })
-            setsocket(socket);
+        socketIO.on("connect", ()=>{
+            (async ()=>{
+                await fetch("http://localhost:9507/transaction/addOnlineUser",{
+                    method:"POST",
+                    credentials: 'include',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body:JSON.stringify({socketId: socketIO.id})
+                })
+            })()
+            setSocket(socketIO);
         })
 
         return async ()=>{
-            await fetch("http://localhost:9507/transactions/removeOnlineUser",{
+            await fetch("http://localhost:9507/transaction/removeOnlineUser",{
                 method:"POST",
                 credentials: 'include',
                 headers: {

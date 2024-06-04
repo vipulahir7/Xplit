@@ -2,7 +2,7 @@ const connectDB =require("./src/db/connectDB.js")
 const express = require("express");
 const env = require('dotenv');
 const userRouter = require("./src/Routes/user.route.js")
-const server = require("./app.js");
+const {server} = require("./app.js");
 
 env.config({
     path:"./.env"

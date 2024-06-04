@@ -1,11 +1,17 @@
 import Message from "./Message";
 import React, { useContext, useEffect } from "react";
-import { CurrentTransactionUserContext, TransactionListContext } from "../../../globalAttributes";
+import { CurrentTransactionUserContext, SocketContext, TransactionListContext } from "../../../globalAttributes";
 
 export default function Messages(){
 
     const {currentTransactionUser}=useContext(CurrentTransactionUserContext);
     const {transactionList,setTransactionList} = useContext(TransactionListContext);
+    const {socket}=useContext(SocketContext);
+    if(socket){
+        socket.on("transaction-added",(data)=>{
+            console.log(data);
+        })
+    }
     
     useEffect(()=>{
         async function loadData (){

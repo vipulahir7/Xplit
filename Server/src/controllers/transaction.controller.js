@@ -2,7 +2,6 @@ const TransactionChat = require("../models/transactionChat.model");
 const User = require("../models/user.model");
 const ApiError = require("../utils/ApiError");
 const ApiResponse = require("../utils/ApiResponse");
-
 const onlineUsers={};
 
 async function HandleVerifyAddUser(req,res){
@@ -53,7 +52,6 @@ async function HandleAddTransaction(req,res){
             res.status(401).json(new ApiResponse(401,{},"You are not logged in to transaction"));
         }
         else{
-
             const userDB = await User.findById(reqUser._id);
             const firstPerson = userDB.email;
             const secondPerson = req.body.recieverEmail;
@@ -84,6 +82,10 @@ async function HandleAddTransaction(req,res){
             else{
                 chat = await TransactionChat.create({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg]});
             }
+            if(onlineUsers[secondPerson] && io){
+                io.to(onlineUsers[secondPerson]).emit("transaction-added",msg);
+            }
+
             res.status(200).json(new ApiResponse(200,{},"transaction loaded successfully"));
         }
     }
@@ -132,6 +134,7 @@ async function HandleAddOnlineUser(req,res){
             const socketId=req.body.socketId;
 
             onlineUsers[email]=socketId;
+            console.log(onlineUsers)
         }
     }
     catch(err){
@@ -157,8 +160,6 @@ async function HandleremoveOnlineUser(req,res){
         throw new ApiError(500,"Failed to remove Online User");
     }
 }
-
-
 
 module.exports = {
     HandleVerifyAddUser,

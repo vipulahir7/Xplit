@@ -101,7 +101,7 @@ const TransactionListProvider = ({children})=>{
   )
 }
 
-const socketProvider = ({children})=>{
+const SocketProvider = ({children})=>{
   const [socket,setSocket]=useState(null);
   return (
     <SocketContext.Provider value={{socket,setSocket}}>
@@ -110,4 +110,4 @@ const socketProvider = ({children})=>{
   )
 }
 
-export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, UserListContext,TransactionListContext,CurrentTransactionUserContext,SocketContext, socketProvider,TransactionListProvider,CurrentTransactionUserProvider, UserListProvider, EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
+export {GlobalContext , LoginContext , expenseListContext,DateDiffContext, UserListContext,TransactionListContext,CurrentTransactionUserContext,SocketContext, SocketProvider,TransactionListProvider,CurrentTransactionUserProvider, UserListProvider, EmailContext,MonthDiffContext,MonthDiffProvider, EmailProvider, DateDiffProvider, ExpenseListProvider , GlobalProvider, LoginProvider}
