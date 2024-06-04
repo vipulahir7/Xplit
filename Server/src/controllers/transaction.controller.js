@@ -121,9 +121,50 @@ async function HandleLoadTransactions(req,res){
     }
 }
 
+async function HandleAddOnlineUser(req,res){
+    try{
+        const reqUser = req.user;
+        if(!reqUser){
+            res.status(401).json(new ApiResponse(401,{},"You are not logged in to transaction"));
+        }
+        else{
+            const email = req.user.email;
+            const socketId=req.body.socketId;
+
+            onlineUsers[email]=socketId;
+        }
+    }
+    catch(err){
+        console.log("error : ",err)
+        throw new ApiError(500,"Failed to add Online User");
+    }
+}
+
+async function HandleremoveOnlineUser(req,res){
+    try{
+        const reqUser = req.user;
+        if(!reqUser){
+            res.status(401).json(new ApiResponse(401,{},"You are not logged in to transaction"));
+        }
+        else{
+            const email = req.user.email;
+            delete onlineUsers[email];
+            console.log(onlineUsers);
+        }
+    }
+    catch(err){
+        console.log("error : ",err)
+        throw new ApiError(500,"Failed to remove Online User");
+    }
+}
+
+
+
 module.exports = {
     HandleVerifyAddUser,
     HandleLoadUserList,
     HandleAddTransaction,
-    HandleLoadTransactions
+    HandleLoadTransactions,
+    HandleAddOnlineUser,
+    HandleremoveOnlineUser
 }
