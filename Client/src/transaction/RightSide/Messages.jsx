@@ -1,5 +1,5 @@
 import Message from "./Message";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect ,useState} from "react";
 import { CurrentTransactionUserContext, SocketContext, TransactionListContext } from "../../../globalAttributes";
 
 export default function Messages(){
@@ -7,11 +7,17 @@ export default function Messages(){
     const {currentTransactionUser}=useContext(CurrentTransactionUserContext);
     const {transactionList,setTransactionList} = useContext(TransactionListContext);
     const {socket}=useContext(SocketContext);
-    if(socket){
-        socket.on("transaction-added",(data)=>{
-            console.log(data);
-        })
-    }
+    
+    const [isListenerBound, setIsListenerBound] = useState(false);
+
+    useEffect(() => {
+        if (socket && !isListenerBound) {
+            socket.on("transaction-added", (data) => {
+                setTransactionList((prev) => [...prev, data]);
+            });
+            setIsListenerBound(true);
+        }
+    }, [socket, isListenerBound]);
     
     useEffect(()=>{
         async function loadData (){
@@ -25,7 +31,6 @@ export default function Messages(){
             })
             const data=await res.json();
             setTransactionList(data.data);
-            console.log(transactionList)
         }
 
         if(currentTransactionUser.hasOwnProperty("username")){

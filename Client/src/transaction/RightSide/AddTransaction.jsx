@@ -6,6 +6,7 @@ import {CurrentTransactionUserContext,TransactionListContext} from "../../../glo
 export default function AddTransaction(){
 
     const {currentTransactionUser}=useContext(CurrentTransactionUserContext);
+    const {transactionList,setTransactionList} = useContext(TransactionListContext);
 
     async function handleAddTransaction(e){
         e.preventDefault();
@@ -13,8 +14,15 @@ export default function AddTransaction(){
         const recieverEmail=currentTransactionUser.email;
         const amount=e.target.amount?.value;
         const note=e.target.note?.value;
+        const email =localStorage.getItem("email");
 
         const data={recieverEmail,amount,note}
+        const msg = {
+            sendBy : email,
+            note,
+            amount,
+            createdAt:new Date().toString()
+        }
 
         const res=await fetch("http://localhost:9507/transaction/addTransaction",{
             method:"POST",
@@ -24,8 +32,7 @@ export default function AddTransaction(){
             },
             body:JSON.stringify(data)
         })
-        const responseData=await res.json();
-        console.log(responseData);
+        setTransactionList((prev)=>[...prev,msg]);
     }
 
     return (

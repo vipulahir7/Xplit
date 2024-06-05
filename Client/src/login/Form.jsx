@@ -38,6 +38,7 @@ export default function Form(){
         })
 
         const responseData=await res.json();
+        console.log(responseData);
 
         if(!res.ok){
             setText(responseData.message);
@@ -45,6 +46,7 @@ export default function Form(){
         }
         else{
             setIsLoggedIn(true);
+            localStorage.setItem("email",responseData.data.loggedInUser.email);
             navigate('/expense');
         }
     }

@@ -2,6 +2,8 @@ const TransactionChat = require("../models/transactionChat.model");
 const User = require("../models/user.model");
 const ApiError = require("../utils/ApiError");
 const ApiResponse = require("../utils/ApiResponse");
+const {getIO}= require("../../io.js")
+
 const onlineUsers={};
 
 async function HandleVerifyAddUser(req,res){
@@ -82,7 +84,9 @@ async function HandleAddTransaction(req,res){
             else{
                 chat = await TransactionChat.create({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg]});
             }
-            if(onlineUsers[secondPerson] && io){
+            const io=getIO();
+
+            if(onlineUsers[secondPerson]){
                 io.to(onlineUsers[secondPerson]).emit("transaction-added",msg);
             }
 
