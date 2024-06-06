@@ -32,7 +32,7 @@ export default function AddTransaction(){
             },
             body:JSON.stringify(data)
         })
-        setTransactionList((prev)=>[...prev,msg]);
+        setTransactionList([...transactionList,msg]);
     }
 
     return (

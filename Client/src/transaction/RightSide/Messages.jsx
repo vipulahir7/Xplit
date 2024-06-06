@@ -54,7 +54,7 @@ export default function Messages(){
 
     return(
         <div className="usermessage h-[86%] overflow-x-hidden overflow-y-auto"  ref={messageContainerRef}>
-            {transactionList.length?transactionList.map((list)=> <Message time={convertToIST(list.createdAt)} isLeft={currentTransactionUser.email==list.sendBy} amount={list.amount} note={list.note} />):<></>}
+            {currentTransactionUser.hasOwnProperty("email") && transactionList.length?transactionList.map((list)=> <Message time={convertToIST(list.createdAt)} isLeft={currentTransactionUser.email==list.sendBy} amount={list.amount} note={list.note} />):<></>}
         </div>
     )
 }

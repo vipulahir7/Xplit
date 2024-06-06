@@ -41,7 +41,7 @@ async function HandleLoadUserList(req,res){
         const userDB = await User.findById(reqUser._id);
         res.status(200).json(new ApiResponse(200,userDB.userList,"transaction loaded successfully"));
     }
-    catch(err){
+    catch(err){ 
         console.log("error : ",err)
         throw new ApiError(500,"Failed to Load List");
     }
@@ -79,11 +79,15 @@ async function HandleAddTransaction(req,res){
             
             if(chat){
                 chat.transactions.push(msg);
-                await chat.save({validateBeforeSave:false});
             }
             else{
-                chat = await TransactionChat.create({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg]});
+                chat = await TransactionChat.create({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg],total:0});
             }
+            
+            if(chat.firstPersonEmail == firstPerson) chat.total += amount;
+            else chat.total -= amount;
+            await chat.save({validateBeforeSave:false});
+
             const io=getIO();
 
             if(onlineUsers[secondPerson]){
@@ -165,11 +169,42 @@ async function HandleremoveOnlineUser(req,res){
     }
 }
 
+async function HandleTotalSum(req,res){
+    try{
+        const reqUser = req.user;
+        if(!reqUser){
+            res.status(401).json(new ApiResponse(401,{},"You are not logged in to transaction"));
+        }
+        else{
+            const userDB = await User.findById(reqUser._id);
+            const firstPerson = userDB.email;
+            const secondPerson = req.body.recieverEmail;
+
+            let chat = await TransactionChat.findOne({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson});
+            if(!chat){
+                chat=await TransactionChat.findOne({firstPersonEmail : secondPerson,secondPersonEmail:firstPerson}); 
+            }
+            let total =0;
+            if(chat) total=chat.total;
+            let firstPers="";
+            if(chat){
+                firstPers=chat.firstPersonEmail;
+            }
+            res.status(200).json(new ApiResponse(200,{total,firstPerson:userDB.email,firstPers},"success"));
+        }
+    }
+    catch(err){
+        console.log("error: ", err);
+        throw new ApiError(500,"Failed to give total of users");
+    }
+}
+
 module.exports = {
     HandleVerifyAddUser,
     HandleLoadUserList,
     HandleAddTransaction,
     HandleLoadTransactions,
     HandleAddOnlineUser,
-    HandleremoveOnlineUser
+    HandleremoveOnlineUser,
+    HandleTotalSum
 }

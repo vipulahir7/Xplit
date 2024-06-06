@@ -13,7 +13,10 @@ const TransactionChatSchema = new mongoose.Schema({
         {
             type:Object
         }
-    ]
+    ],
+    total:{
+        type: Number
+    }
 });
 
 const TransactionChat = mongoose.model("transactionChat",TransactionChatSchema);

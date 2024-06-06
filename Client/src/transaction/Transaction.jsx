@@ -49,7 +49,7 @@ export default function Transaction(){
                         <Left />
                         <Right />
                         <div>
-                           {/* {isSelected && <AmountDetails />} */}
+                           {isSelected && <AmountDetails />}
                            {isSelected && <AddTransaction />}
                         </div>
                     </div>

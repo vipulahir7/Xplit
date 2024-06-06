@@ -1,15 +1,6 @@
 import React from "react";
-let Amount = 0;
 
 export default function Message({time,isLeft,amount,note}){
-    if(isLeft){
-        Amount -= amount;
-    }
-    else{
-        Amount += amount;
-    }
-    console.log(Amount);
-
     return(
            <div>
              <div className={`${isLeft ?"justify-start ml-3 mr-20" :"justify-end mr-3 ml-20" } min-w-[20%] flex `}>
