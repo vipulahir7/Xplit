@@ -3,18 +3,26 @@
 @tailwind utilities;
 
 body[data-theme="Dark"],body{
-    --primary-bg:#111827;
-    color:white;
-    --header:#1f2937;
-    --nav-bg:#374151;
-    --primary-btn:#b7b6fd;
-    --notes-bg:#808892;
-    --notes-secondary-bg:#bbbbbb;
-}
-
-body[data-theme="Light"]{
-    --primary-bg:#F2F6FE;
+    /* --primary-bg:#111827; */
+    /* color:white; */
+    /* --nav-bg:#374151; */
+    /* --header:#1f2937; */
+    /* --notes-bg:#808892; */
+    /* --notes-secondary-bg:#bbbbbb; */
+    --header:#151521;
+    color: #e0e0e0;
+    --primary-bg:#1e1e2e;
+    --nav-bg:#2c2c3c;
+    --primary-btn:#7a6fdf;
+    --notes-bg:#3a3a4a;
+    --notes-secondary-bg:#5a5a70;
+  }
+  
+  body[data-theme="Light"]{
+    /* --primary-bg:#F2F6FE; */
+    --primary-bg: #f5f5f5;
     color:black;
+    --primary-btn:#b7b6fd;
     --header:#d5d5ec;
     --nav-bg:#efeff5;
     --notes-bg:#c1c1cb;

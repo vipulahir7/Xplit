@@ -34,7 +34,7 @@ export default function Monthly() {
                 </div>
 
                 <div className="h-[90%] w-[100%] flex flex-col justify-center">
-                    <div className="flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
+                    <div className="usermessage flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
                         {yearlyData.map(data => (
                             <MonthlyList key={data.date} date={new Date(data.date).toISOString().split("T")[0].split("-")[0] +"-"+ new Date(data.date).toISOString().split("T")[0].split("-")[1]} amount={data.amount} />
                         ))}

@@ -51,7 +51,7 @@ export default function Monthly() {
                 <button onClick={incrementDiff} className="bg-[color:var(--primary-btn)] drop-shadow-lg rounded-3xl p-2"><img src="/images/Move-right.svg" alt="next" /></button>
             </div>
             <div className="h-[90%] w-[100%] flex flex-col justify-center">
-                <div className="flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
+                <div className="usermessage flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
                     {monthlyData.map(data => (
                         <MonthlyList key={data.date} date={new Date(data.date).toISOString().split("T")[0]} amount={data.amount} />
                     ))}

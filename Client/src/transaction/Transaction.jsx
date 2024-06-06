@@ -5,6 +5,7 @@ import { useContext,useMemo,useEffect,useState } from "react";
 import AddTransaction from "./RightSide/AddTransaction";
 import {UserListProvider,CurrentTransactionUserContext, TransactionListProvider, SocketContext} from "../../globalAttributes.jsx"
 import { io } from "socket.io-client";
+import AmountDetails from "./RightSide/AmountDetails.jsx";
 
 export default function Transaction(){
     
@@ -47,7 +48,10 @@ export default function Transaction(){
                     <div className="flex justify-center items-end drop-shadow-2xl">
                         <Left />
                         <Right />
-                        {isSelected && <AddTransaction />}
+                        <div>
+                           {/* {isSelected && <AmountDetails />} */}
+                           {isSelected && <AddTransaction />}
+                        </div>
                     </div>
                 </div>
             </UserListProvider>

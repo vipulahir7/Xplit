@@ -1,5 +1,5 @@
 import Message from "./Message";
-import React, { useContext, useEffect ,useState} from "react";
+import React, { useContext, useEffect ,useState, useRef} from "react";
 import { CurrentTransactionUserContext, SocketContext, TransactionListContext } from "../../../globalAttributes";
 
 export default function Messages(){
@@ -9,6 +9,14 @@ export default function Messages(){
     const {socket}=useContext(SocketContext);
     
     const [isListenerBound, setIsListenerBound] = useState(false);
+    const messageContainerRef = useRef(null);
+
+    const convertToIST = (dateString) => {
+        const date = new Date(dateString);
+        const newDate=date.toString();
+        const ret=newDate.split(" ")[4]
+        return ret;
+    };
 
     useEffect(() => {
         if (socket && !isListenerBound) {
@@ -36,11 +44,17 @@ export default function Messages(){
         if(currentTransactionUser.hasOwnProperty("username")){
             loadData();
         }
-    },[currentTransactionUser])
+    },[currentTransactionUser]);
+
+    useEffect(() => {
+        if (messageContainerRef.current) {
+            messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+        }
+    }, [transactionList]);
 
     return(
-        <div className="usermessage h-[86%] overflow-x-hidden overflow-y-auto">
-            {transactionList.length?transactionList.map((list)=> <Message time={list.createdAt} isLeft={currentTransactionUser.email==list.sendBy} amount={list.amount} note={list.note} />):<></>}
+        <div className="usermessage h-[86%] overflow-x-hidden overflow-y-auto"  ref={messageContainerRef}>
+            {transactionList.length?transactionList.map((list)=> <Message time={convertToIST(list.createdAt)} isLeft={currentTransactionUser.email==list.sendBy} amount={list.amount} note={list.note} />):<></>}
         </div>
     )
 }

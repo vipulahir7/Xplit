@@ -13,6 +13,7 @@ export default function Daily(){
     const convertToIST = (dateString) => {
         const date = new Date(dateString);
         const newDate=date.toString();
+        console.log(newDate);
         const ret=newDate.split(" ")[4]
         return ret;
     };
@@ -40,7 +41,7 @@ export default function Daily(){
         < div className="h-[100%] w-[26%] relative bg-[color:var(--nav-bg)] rounded-lg flex flex-col">
             <ExpenseHeading text="Daily Expenses"/>
             <div className="h-[90%] w-[100%] flex flex-col justify-center">
-                <div className="flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
+                <div className="usermessage flex flex-col flex-nowrap h-[95%] overflow-x-hidden overflow-y-auto items-center">
                 {expenseList.map(expense => (
                     <ExpenseList key={expense.id} amount={expense.amount} category={expense.category} note={expense.note} time={convertToIST(expense.createdAt)} />
                 ) )}
