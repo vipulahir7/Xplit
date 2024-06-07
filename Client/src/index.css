@@ -16,6 +16,7 @@ body[data-theme="Dark"],body{
     --primary-btn:#7a6fdf;
     --notes-bg:#3a3a4a;
     --notes-secondary-bg:#5a5a70;
+    --notes-hover-bg: #eaeaea;
   }
   
   body[data-theme="Light"]{
