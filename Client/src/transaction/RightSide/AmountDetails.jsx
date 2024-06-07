@@ -25,7 +25,6 @@ export default function AmountDetails(){
             })
 
             const responseData = await res.json();
-            console.log(responseData);
             setTotal(responseData.data.total);
             setemail(responseData.data.firstPerson);
             setchatemail(responseData.data.firstPers);
