@@ -10,8 +10,8 @@ export default function Messages() {
     const [isListenerBound, setIsListenerBound] = useState(false);
     const messageContainerRef = useRef(null);
 
-    const [startDate] = useState('');
-    const [endDate] = useState('');
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
     const [filteredTransactions, setFilteredTransactions] = useState([]);
 
     const convertToIST = (dateString) => {
@@ -42,7 +42,7 @@ export default function Messages() {
                 body: JSON.stringify({ recieverEmail: currentTransactionUser.email })
             });
             const data = await res.json();
-            setTransactionList(data.data);
+            setTransactionList(data.data || []);
         }
 
         if (currentTransactionUser.hasOwnProperty("username")) {
@@ -61,6 +61,8 @@ export default function Messages() {
     }, [startDate, endDate, transactionList]);
 
     const filterTransactions = () => {
+        if (!Array.isArray(transactionList)) return;
+
         const start = new Date(startDate);
         const end = new Date(endDate);
         const filtered = transactionList.filter(transaction => {
