@@ -16,6 +16,7 @@ export default function Transaction(){
     
     useEffect(()=>{
         socketIO.on("connect", ()=>{
+            console.log("connected",socketIO.id);
             (async ()=>{
                 await fetch("http://localhost:9507/transaction/addOnlineUser",{
                     method:"POST",
@@ -29,15 +30,8 @@ export default function Transaction(){
             setSocket(socketIO);
         })
 
-        return async ()=>{
-            await fetch("http://localhost:9507/transaction/removeOnlineUser",{
-                method:"POST",
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-          socket.disconnect();
+        return ()=>{
+            socketIO.disconnect();
         };
       },[])
 
