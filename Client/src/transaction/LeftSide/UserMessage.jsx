@@ -20,7 +20,7 @@ export default function UserMessage(){
             setUserList(data.data)
         })()
 
-    },[])
+    },[userList])
 
     return(
         <div className="h-[80%] user overflow-x-hidden flex flex-col items-center overflow-y-auto mb-2">

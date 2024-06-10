@@ -22,6 +22,19 @@ async function HandleVerifyAddUser(req,res){
     
             userDB.userList.push({username:user.name,email});
             await userDB.save({validateBeforeSave:false});
+
+            user.userList.push({username : userDB.name,email : userDB.email});
+            await user.save({validateBeforeSave:false});
+
+
+            await TransactionChat.create(
+                {
+                    firstPersonEmail : userDB.email,
+                    secondPersonEmail : email, 
+                    transactions :[],
+                    total : 0
+                }
+            )
     
             res.status(200).json(new ApiResponse(200,{username:user.name},"Success"));
         }
@@ -77,12 +90,7 @@ async function HandleAddTransaction(req,res){
                 createdAt : new Date()
             }
             
-            if(chat){
-                chat.transactions.push(msg);
-            }
-            else{
-                chat = await TransactionChat.create({firstPersonEmail : firstPerson,secondPersonEmail:secondPerson,transactions:[msg],total:0});
-            }
+            chat.transactions.push(msg);
             
             if(chat.firstPersonEmail == firstPerson) chat.total += amount;
             else chat.total -= amount;
@@ -121,7 +129,7 @@ async function HandleLoadTransactions(req,res){
                 res.status(200).json(new ApiResponse(200,chat.transactions,"Success"));
             }
             else{
-                res.status(500).json(new ApiResponse(500,{},"Server error"));
+                res.status(500).json(new ApiResponse(500,[],"Server error"));
             }
         }
     }
