@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react";
+import React, { useContext, useEffect, useState, useRef, useLayoutEffect } from "react";
 import Message from "./Message";
 import { CurrentTransactionUserContext, SocketContext, TransactionListContext } from "../../../globalAttributes";
 
@@ -50,10 +50,12 @@ export default function Messages() {
         }
     }, [currentTransactionUser]);
 
-    useEffect(() => {
-        if (messageContainerRef.current) {
-            messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
-        }
+    useLayoutEffect(() => {
+        setTimeout(() => {
+            if (messageContainerRef.current) {
+                messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+            }
+        }, 0);
     }, [transactionList]);
 
     useEffect(() => {
@@ -95,8 +97,7 @@ export default function Messages() {
                     ? filteredTransactions.map(({ date, transactions }) => (
                         <div key={date}>
                             <div className="flex justify-center">
-                            <span className="date-span bg-[color:var(--header)] m-1 p-1 rounded-md">{date}</span>
-
+                                <span className="date-span bg-[color:var(--header)] m-1 p-1 rounded-md">{date}</span>
                             </div>
 
                             {transactions.map((list) => (
