@@ -28,7 +28,7 @@ export default function Form(){
             password
         }
 
-        const res=await fetch("http://localhost:9507/user/login",{
+        const res=await fetch("https://xplit-backend.onrender.com/user/login",{
             method:"POST",
             credentials: 'include',
             headers: {
