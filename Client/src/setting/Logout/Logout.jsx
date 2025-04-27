@@ -19,7 +19,7 @@ export default function Logout() {
         e.preventDefault();
         const password = e.target.password.value;
 
-        const res=await fetch("http://localhost:9507/user/logOut",{
+        const res=await fetch(`${import.meta.env.VITE_BackendAPI_URL}/user/logOut`,{
             method:"POST",
             credentials: 'include',
             headers: {

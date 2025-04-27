@@ -8,7 +8,7 @@ export default function DateDetails(){
 
     useEffect( () => {
         const loadData = async ()=>{
-            const res=await fetch("http://localhost:9507/expense/getDailySum",{
+            const res=await fetch(`${import.meta.env.VITE_BackendAPI_URL}/expense/getDailySum`,{
                 method:"POST",
                 credentials:'include',
                 headers:{

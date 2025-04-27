@@ -39,7 +39,7 @@ const handleSubmit =async (e)=>{
             password
         };
         
-        const res = await fetch("http://localhost:9507/user/signup",{
+        const res = await fetch(`${import.meta.env.VITE_BackendAPI_URL}/user/signup`,{
             method:"POST",
             headers: {
                 'Content-Type': 'application/json'

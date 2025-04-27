@@ -5,7 +5,7 @@ export default function MonthDetails(){
 
     useEffect( () => {
         const loadData = async ()=>{
-            const res=await fetch("http://localhost:9507/expense/getYearlySum",{
+            const res=await fetch(`${import.meta.env.VITE_BackendAPI_URL}/expense/getYearlySum`,{
                 method:"POST",
                 credentials:'include',
                 headers:{

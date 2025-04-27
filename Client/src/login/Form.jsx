@@ -7,6 +7,8 @@ import AuthenticationPopup from "./AuthencationPopup.jsx";
 import { LoginContext } from "../../globalAttributes.jsx";
 
 export default function Form(){
+    console.log("SEE HERE: ");
+    console.log(import.meta.env.VITE_BackendAPI_URL);
 
     const {isLoggedIn,setIsLoggedIn} = useContext(LoginContext);
 
@@ -27,8 +29,7 @@ export default function Form(){
             email,
             password
         }
-
-        const res=await fetch("https://xplit-backend.onrender.com/user/login",{
+        const res=await fetch(`${import.meta.env.VITE_BackendAPI_URL}/user/login`,{
             method:"POST",
             credentials: 'include',
             headers: {

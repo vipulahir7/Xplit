@@ -24,7 +24,7 @@ export default function AddUser(){
             setShowPopup(true);
         }
         else{
-            const res = await fetch("http://localhost:9507/transaction/verifyAddUser",{
+            const res = await fetch(`${import.meta.env.VITE_BackendAPI_URL}/transaction/verifyAddUser`,{
                 method:"POST",
                 credentials: 'include',
                 headers: {

@@ -12,7 +12,7 @@ export default function Monthly() {
             date.setDate(1);
             date.setMonth(0);
 
-            const res = await fetch("http://localhost:9507/expense/loadMonthlySum", {
+            const res = await fetch(`${import.meta.env.VITE_BackendAPI_URL}/expense/loadMonthlySum`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {

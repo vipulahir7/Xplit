@@ -6,7 +6,7 @@ export default function UserEmail(){
 
     (async function(){
         
-        const res=await fetch("http://localhost:9507/user/getUser",{
+        const res=await fetch(`${import.meta.env.VITE_BackendAPI_URL}/user/getUser`,{
             method:"POST",
             credentials: 'include',
             headers: {

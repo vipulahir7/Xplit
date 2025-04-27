@@ -20,7 +20,7 @@ export default function Daily(){
 
     useEffect( () => {
         const loadData =async ()=>{
-            const res=await fetch("http://localhost:9507/expense/loadExpense",{
+            const res=await fetch(`${import.meta.env.VITE_BackendAPI_URL}/expense/loadExpense`,{
                 method:"POST",
                 credentials:'include',
                 headers:{

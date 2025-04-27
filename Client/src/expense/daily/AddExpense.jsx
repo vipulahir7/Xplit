@@ -21,7 +21,7 @@ export default function AddExpense(){
             createDate:new Date().setDate(new Date().getDate()+dateDiff)
         }
 
-        const res = await fetch("http://localhost:9507/expense/addExpense",{
+        const res = await fetch(`${import.meta.env.VITE_BackendAPI_URL}/expense/addExpense`,{
             method:"POST",
             credentials:'include',
             headers:{

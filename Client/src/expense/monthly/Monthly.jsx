@@ -13,7 +13,7 @@ export default function Monthly() {
             date.setDate(1);
             date.setMonth(new Date().getMonth() + monthDiff);
             
-            const res = await fetch("http://localhost:9507/expense/loadDailySum", {
+            const res = await fetch(`${import.meta.env.VITE_BackendAPI_URL}/expense/loadDailySum`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {

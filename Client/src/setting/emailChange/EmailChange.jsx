@@ -32,7 +32,7 @@ export default function EmailChange(){
         }
         else{
 
-            const res= await fetch("http://localhost:9507/user/changeEmail",{
+            const res= await fetch(`${import.meta.env.VITE_BackendAPI_URL}/user/changeEmail`,{
             method:'POST',
             credentials:'include',
             headers:{

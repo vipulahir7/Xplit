@@ -9,7 +9,7 @@ export default function UserMessage(){
     useEffect(()=>{
 
         (async function (){
-            const res= await fetch("http://localhost:9507/transaction/loadUserList",{
+            const res= await fetch(`${import.meta.env.VITE_BackendAPI_URL}/transaction/loadUserList`,{
                 method:"POST",
                 credentials: 'include',
                 headers: {

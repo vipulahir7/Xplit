@@ -24,7 +24,7 @@ export default function AddTransaction(){
             createdAt:new Date().toString()
         }
 
-        const res=await fetch("http://localhost:9507/transaction/addTransaction",{
+        const res=await fetch(`${import.meta.env.VITE_BackendAPI_URL}/transaction/addTransaction`,{
             method:"POST",
             credentials: 'include',
             headers: {

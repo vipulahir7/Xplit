@@ -12,13 +12,13 @@ export default function Transaction(){
     const {currentTransactionUser}=useContext(CurrentTransactionUserContext);
     let isSelected=(currentTransactionUser.hasOwnProperty("username"));
     const {socket,setSocket} =useContext(SocketContext);
-    const socketIO = useMemo(()=>io("http://localhost:9507"),[]);
+    const socketIO = useMemo(()=>io(`${import.meta.env.VITE_BackendAPI_URL}`),[]);
     
     useEffect(()=>{
         socketIO.on("connect", ()=>{
             console.log("connected",socketIO.id);
             (async ()=>{
-                await fetch("http://localhost:9507/transaction/addOnlineUser",{
+                await fetch(`${import.meta.env.VITE_BackendAPI_URL}/transaction/addOnlineUser`,{
                     method:"POST",
                     credentials: 'include',
                     headers: {

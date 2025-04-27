@@ -15,7 +15,7 @@ export default function AmountDetails(){
             const recieverEmail=currentTransactionUser.email;
             const data = {recieverEmail};
 
-            const res=await fetch("http://localhost:9507/transaction/getSum",{
+            const res=await fetch(`${import.meta.env.VITE_BackendAPI_URL}/transaction/getSum`,{
             method:"POST",
             credentials: 'include',
             headers: {

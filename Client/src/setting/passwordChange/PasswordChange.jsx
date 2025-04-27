@@ -33,7 +33,7 @@ export default function PasswordChange(){
                 newPassword,
             }
     
-            const res= await fetch("http://localhost:9507/user/changePassword",{
+            const res= await fetch(`${import.meta.env.VITE_BackendAPI_URL}/user/changePassword`,{
                 method:'POST',
                 credentials:'include',
                 headers:{

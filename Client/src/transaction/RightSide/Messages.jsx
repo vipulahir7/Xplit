@@ -33,7 +33,7 @@ export default function Messages() {
 
     useEffect(() => {
         async function loadData() {
-            const res = await fetch("http://localhost:9507/transaction/loadTransactions", {
+            const res = await fetch(`${import.meta.env.VITE_BackendAPI_URL}/transaction/loadTransactions`, {
                 method: "POST",
                 credentials: 'include',
                 headers: {
