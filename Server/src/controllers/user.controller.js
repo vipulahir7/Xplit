@@ -4,7 +4,8 @@ const ApiResponse = require("../utils/ApiResponse");
 
 const options = {
     httpOnly: true,
-    secure: true
+    secure: true,
+    sameSite: 'None',
 }
 
 const generateAccessAndRefreshToken = async function(userId){

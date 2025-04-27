@@ -14,7 +14,7 @@ app.use(express.json({limit: "16kb"}))
 app.use(express.urlencoded({extended: false, limit: "16kb"}))
 
 app.use(cors({
-    origin:["https://xplit.vercel.app" ,"https://xplit-git-main-vipul-ahirs-projects.vercel.app"],
+    origin:["https://xplit.vercel.app" ,"https://xplit-git-main-vipul-ahirs-projects.vercel.app", "http://localhost:5173"],
     credentials: true
 }))
 
