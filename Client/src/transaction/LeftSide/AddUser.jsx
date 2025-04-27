@@ -4,8 +4,8 @@ import {UserListContext} from "../../../globalAttributes.jsx"
 
 export default function AddUser(){
 
-    const {userList,setUserList}=useContext(UserListContext);
-    const [showPopup,setShowPopup] =useState(false);
+    const {userList,setUserList}= useContext(UserListContext);
+    const [showPopup,setShowPopup] = useState(false);
     const [text,setText] = useState("");
 
     async function handleAddUser(e){
