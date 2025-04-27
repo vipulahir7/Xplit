@@ -2,8 +2,8 @@ const mongoose= require("mongoose");
 const ApiError =require("../utils/ApiError.js")
 
 module.exports=async function connetDB(){
-    
-    const connected = await mongoose.connect("mongodb://127.0.0.1:27017/Xplit");
+    // console.log(process.env.MONGO_URI);
+    const connected = await mongoose.connect(process.env.MONGO_URI);
     if(connected){
         console.log("Connected to MongoDB");
         return connected
