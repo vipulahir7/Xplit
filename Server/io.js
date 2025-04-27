@@ -6,7 +6,7 @@ function initializeIO (server){
     
     io=new Server(server,{
         cors:{
-            origin:"http://localhost:5173",
+            origin:["https://xplit.vercel.app" ,"https://xplit-git-main-vipul-ahirs-projects.vercel.app"],
             credentials:true,
             methods:["GET", "POST"]
         }
